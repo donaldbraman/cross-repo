@@ -1,6 +1,6 @@
 # Document Proofreading Command
 
-**Version:** 2.0.0
+**Version:** 2.1.0
 **Last Updated:** 2025-01-19
 
 Proofread a document for errors, inconsistencies, and issues. Use `$ARGUMENTS` to specify the file path and optional parameters.
@@ -18,8 +18,23 @@ You are a professional proofreader. Your task is to systematically review a docu
 
 ### Setup
 
-1. **Identify document type** from the file extension
-2. **Get document info** to understand structure:
+1. **Check for local style guides** before proofreading:
+   ```bash
+   # Look for style guides in common locations
+   ls docs/style-guide* docs/STYLE* STYLE* 2>/dev/null
+   ls docs/guides/style* docs/guides/writing* 2>/dev/null
+   ```
+
+   If found, read the style guide first and apply its conventions when reviewing. Common style guide elements:
+   - Citation format (Chicago, APA, Bluebook, etc.)
+   - Spelling preferences (American vs British)
+   - Terminology conventions
+   - Heading/capitalization rules
+   - Number formatting rules
+   - Abbreviation conventions
+
+2. **Identify document type** from the file extension
+3. **Get document info** to understand structure:
 
 **For PDF:**
 ```bash
@@ -36,7 +51,7 @@ wc -l "$ARGUMENTS"
 head -50 "$ARGUMENTS"
 ```
 
-3. **Plan review strategy** based on document size:
+4. **Plan review strategy** based on document size:
    - < 20 pages/500 lines: Review all
    - 20-50 pages/500-2000 lines: Review in batches
    - > 50 pages/2000 lines: Focus on key sections
@@ -169,6 +184,10 @@ After reviewing, provide a structured report:
 ---
 
 ## Version History
+
+### 2.1.0 (2025-01-19)
+- Added step to check for local style guides before proofreading
+- Agents now apply project-specific conventions (citation format, spelling, terminology)
 
 ### 2.0.0 (2025-01-19)
 - Generalized from chirho PDF proofer
