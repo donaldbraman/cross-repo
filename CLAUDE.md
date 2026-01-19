@@ -4,16 +4,21 @@
 
 ## Autonomous Development Cycle
 
-Standard Dev Cycle: Analyze & Research → Detailed GitHub Issue & Linked Dev Branch → Dev & Test → Lint → Commit, Push & Merge → Close Issue & Delete Branch
+Standard Dev Cycle: Analyze & Research → GitHub Issue & Worktree → Dev & Test → Lint → Commit, Push & Merge → Close Issue & Delete Worktree
+
+**Details:** [~/.claude/guides/autonomous-cycle.md](file:///Users/donaldbraman/.claude/guides/autonomous-cycle.md)
 
 ## Critical Rules
 
 - ❌ NEVER use `--no-verify` in autonomous mode
 - ❌ NEVER bypass pre-commit hooks
+- ❌ NEVER work in main repo directory (use worktrees)
 - ✅ ALWAYS fix hook failures by fixing code
+- ✅ ALWAYS use worktrees for isolated development
 - ✅ ALWAYS read step guides before executing:
-  - Step 5 (Lint): `~/.claude/guides/lint-and-hooks.md`
-  - Step 6 (PR): `~/.claude/guides/pr-guidelines.md`
+  - Step 2 (Worktree): `~/.claude/guides/worktree-dev-cycle.md`
+  - Step 4 (Lint): `~/.claude/guides/lint-and-hooks.md`
+  - Step 5 (PR): `~/.claude/guides/pr-guidelines.md`
 
 ## GitHub Labels
 
@@ -48,4 +53,4 @@ Each repository has project-specific instructions:
 
 ---
 
-*Last updated: 2025-10-14*
+*Last updated: 2025-01-19*
