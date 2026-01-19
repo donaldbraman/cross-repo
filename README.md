@@ -79,6 +79,7 @@ Located in `.claude/commands/`:
 
 | Command | Purpose | Version |
 |---------|---------|---------|
+| **[dev-cycle](.claude/commands/dev-cycle.md)** | Execute full autonomous development cycle with worktrees | 1.0.0 |
 | **[fact-check](.claude/commands/fact-check.md)** | Verify empirical claims, statistics, and citations | 1.0.0 |
 | **[proof](.claude/commands/proof.md)** | Proofread documents (PDF, Markdown, text) | 2.1.0 |
 
@@ -199,6 +200,7 @@ cross-repo/
     │       └── SKILL.md
     ├── commands/                                # Shared commands
     │   ├── README.md
+    │   ├── dev-cycle.md
     │   ├── fact-check.md
     │   └── proof.md
     └── guides/                                  # Shared guides
