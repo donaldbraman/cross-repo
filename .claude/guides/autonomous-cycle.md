@@ -1,5 +1,7 @@
 # Autonomous Development Cycle
 
+**Version:** 1.0.0
+**Last Updated:** 2025-11-10
 **Applies to:** All repositories
 
 ## 8-Step Cycle
@@ -30,4 +32,16 @@
 
 ## Project-Specific Details
 
-Check for `docs/CLAUDE.md` or `docs/guides/` in current repo for project-specific workflow details.
+This is a **global guide** applicable to all repositories.
+
+Check `docs/CLAUDE.md` or `docs/guides/` in current repo for project-specific workflow details.
+
+## Related Guides
+
+- [Lint & Hooks](lint-and-hooks.md) - Step 5: Pre-commit hook handling
+- [PR Guidelines](pr-guidelines.md) - Step 6: Pull request creation
+- [Git Workflow](git-workflow.md) - Branch and commit conventions
+
+---
+
+*Last updated: 2025-11-10*

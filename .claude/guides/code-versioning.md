@@ -1,7 +1,8 @@
 # Code Versioning Guide
 
 **Version:** 1.0.0
-**Last Updated:** 2025-10-14
+**Last Updated:** 2025-11-10
+**Applies to:** All repositories
 
 ## Semantic Versioning
 
@@ -135,23 +136,85 @@ git push
 ## Guide Versioning
 
 ### Version Header
+
+Every guide must have a version header:
+
 ```markdown
 # Guide Title
 
 **Version:** 1.0.0
-**Last Updated:** 2025-10-14
-**Compatibility:** cite-assist >=2.0.0
+**Last Updated:** 2025-11-10
+**Applies to:** All repositories
 ```
 
-### Version Changes
-- **1.0.0 → 1.1.0:** Added section
-- **1.1.0 → 2.0.0:** Removed/changed instructions
-- **2.0.0 → 2.0.1:** Fixed typos/clarity
+### When to Bump Guide Versions
 
-### Validation Script
-```bash
-# Check guide compatibility
-uv run python scripts/validate_guides.py
+**MAJOR version (X.0.0)** - Workflow changes that affect existing usage:
+- Changing from merge to squash strategy
+- Removing a required step
+- Changing command syntax
+- Example: `1.2.0 → 2.0.0`
+
+**MINOR version (x.Y.0)** - Adding new content without breaking existing:
+- Added new section
+- Added new examples
+- Added new troubleshooting
+- Example: `1.0.0 → 1.1.0`
+
+**PATCH version (x.y.Z)** - Fixes and clarifications:
+- Fixed typos
+- Clarified existing content
+- Updated dates
+- Example: `1.0.0 → 1.0.1`
+
+### Guide Changelog Pattern
+
+Add a changelog section at the end of guides when making significant changes:
+
+```markdown
+## Changelog
+
+### [1.1.0] - 2025-11-10
+- Added: Project-specific details section
+- Added: Related guides footer
+- Fixed: Clarified label creation workflow
+
+### [1.0.0] - 2025-10-14
+- Initial release
+```
+
+**When to add changelog:**
+- ✅ MAJOR or MINOR version bumps
+- ❌ PATCH bumps (too granular)
+
+**Where to add:**
+- At end of guide, before final "Last updated" footer
+- Or in separate CHANGELOG.md file for this repository
+
+### Guide Versioning Example
+
+```markdown
+# GitHub Labels
+
+**Version:** 1.1.0  ← Bumped from 1.0.0
+**Last Updated:** 2025-11-10  ← Updated date
+**Applies to:** All repositories
+
+[... guide content ...]
+
+## Changelog
+
+### [1.1.0] - 2025-11-10
+- Added: "Always create before using" workflow
+- Added: Troubleshooting section
+- Added: Project-specific labels section
+
+### [1.0.0] - 2025-10-14
+- Initial release
+
+---
+
+*Last updated: 2025-11-10*
 ```
 
 ## Change Log
@@ -249,6 +312,20 @@ chore: Bump version to 2.0.0 (v3 API release)
 
 ### Bug Fix
 `2.0.0` → `2.0.1` → `2.0.2`
+
+## Project-Specific Details
+
+This is a **global guide** applicable to all repositories.
+
+Check `docs/guides/code-versioning.md` in current repo for:
+- Project-specific version locations
+- Custom versioning schemes
+- Release process details
+- Version documentation requirements
+
+## Related Guides
+
+- [Git Workflow](git-workflow.md) - Version bumping workflow and commits
 
 ---
 

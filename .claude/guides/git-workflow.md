@@ -1,13 +1,40 @@
 # Git Workflow Guide
 
 **Version:** 1.0.0
-**Last Updated:** 2025-10-14
+**Last Updated:** 2025-11-10
+**Applies to:** All repositories
 
 ## Standard Git Workflow
 
 All projects follow this consistent git workflow pattern.
 
 ## Branch Strategy
+
+### Visual Overview
+
+```
+main (production-ready)
+  │
+  ├─── feature/442-v3-api-hybrid-search
+  │      │
+  │      ├─ commit: Add hybrid search service
+  │      ├─ commit: Add v3 API endpoint
+  │      ├─ commit: Update documentation
+  │      │
+  │      └─ PR #443 (squash merge) ──> main
+  │                                      │
+  ├─── feature/445-fix-timeout          │
+  │      │                               │
+  │      ├─ commit: Add connection pool  │
+  │      ├─ commit: Fix N+1 query        │
+  │      │                               │
+  │      └─ PR #446 (squash merge) ──────┘
+  │
+  └─── feature/447-add-caching (in progress)
+         │
+         ├─ commit: Add Redis client
+         └─ commit: Implement cache layer
+```
 
 ### Main Branch
 - **Name:** `main` (not master)
@@ -130,52 +157,38 @@ git log -1 --format='%an %ae'
 git commit --amend --no-edit
 ```
 
-## Best Practices
-
-### Before Starting Work
-1. ✅ Pull latest main
-2. ✅ Create issue
-3. ✅ Create feature branch from main
-4. ✅ Make small, focused commits
-
-### During Development
-1. ✅ Commit frequently
-2. ✅ Write descriptive commit messages
-3. ✅ Let hooks run (never bypass)
-4. ✅ Rebase on main regularly
-
-### After Completing Work
-1. ✅ Run all tests
-2. ✅ Verify pre-commit hooks pass
-3. ✅ Create PR
-4. ✅ Merge immediately (autonomous mode)
-5. ✅ Delete feature branch
-6. ✅ Close issue
-
 ## Troubleshooting
 
-### Detached HEAD State
 ```bash
-# Return to branch
+# Detached HEAD
 git checkout <branch-name>
-```
 
-### Accidentally Committed to Main
-```bash
-# Move commits to feature branch
+# Accidentally committed to main
 git branch feature/xxx
 git reset --hard origin/main
 git checkout feature/xxx
-```
 
-### Lost Commits
-```bash
-# Find commit hash
+# Lost commits
 git reflog
-
-# Recover commit
 git cherry-pick <hash>
 ```
+
+## Project-Specific Details
+
+This is a **global guide** applicable to all repositories.
+
+Check `docs/guides/git-workflow.md` in current repo for:
+- Project-specific branch naming conventions
+- Custom merge strategies
+- Release branch workflows
+- Hotfix procedures
+
+## Related Guides
+
+- [Lint & Hooks](lint-and-hooks.md) - Pre-commit hook handling
+- [PR Guidelines](pr-guidelines.md) - Pull request conventions
+- [Code Versioning](code-versioning.md) - Version bumping practices
+- [Autonomous Cycle](autonomous-cycle.md) - Full development workflow
 
 ---
 

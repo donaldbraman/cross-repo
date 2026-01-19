@@ -4,9 +4,7 @@
 
 ## Autonomous Development Cycle
 
-8-step cycle: Analyze → Branch → Fix → Test → Lint → PR → Merge → Cleanup
-
-**Full details:** [~/.claude/guides/autonomous-cycle.md](file:///Users/donaldbraman/.claude/guides/autonomous-cycle.md)
+Standard Dev Cycle: Analyze & Research → Detailed GitHub Issue & Linked Dev Branch → Dev & Test → Lint → Commit, Push & Merge → Close Issue & Delete Branch
 
 ## Critical Rules
 
