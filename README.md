@@ -79,7 +79,8 @@ Located in `.claude/commands/`:
 
 | Command | Purpose | Version |
 |---------|---------|---------|
-| **[proof](.claude/commands/proof.md)** | Proofread documents (PDF, Markdown, text) | 2.0.0 |
+| **[fact-check](.claude/commands/fact-check.md)** | Verify empirical claims, statistics, and citations | 1.0.0 |
+| **[proof](.claude/commands/proof.md)** | Proofread documents (PDF, Markdown, text) | 2.1.0 |
 
 See [Commands README](.claude/commands/README.md) for usage.
 
@@ -95,10 +96,6 @@ Located in `.claude/guides/`:
 - **[lint-and-hooks.md](.claude/guides/lint-and-hooks.md)**: Pre-commit hook handling
 - **[git-workflow.md](.claude/guides/git-workflow.md)**: Standard git practices
 - **[code-versioning.md](.claude/guides/code-versioning.md)**: Semantic versioning patterns
-
-### Documentation
-
-- **[Agent Messaging Guide](docs/guides/agent-messaging-complete-guide.md)**: Complete implementation guide for agent communication
 
 ## Setup
 
@@ -192,30 +189,28 @@ When reading instructions:
 cross-repo/
 ├── README.md                                    # This file
 ├── CLAUDE.md                                    # Global Claude Code instructions
-├── .claude/
-│   ├── agents/                                  # Shared agent templates
-│   │   ├── README.md
-│   │   ├── testing-agent.md
-│   │   └── janitor-agent.md
-│   ├── skills/                                  # Shared skills (living docs)
-│   │   ├── README.md
-│   │   └── rate-limit-diagnostics/
-│   │       └── SKILL.md
-│   ├── commands/                                # Shared commands
-│   │   ├── README.md
-│   │   └── proof.md
-│   └── guides/                                  # Shared guides
-│       ├── autonomous-cycle.md
-│       ├── agent-messaging.md
-│       ├── github-labels.md
-│       ├── pr-guidelines.md
-│       ├── lint-and-hooks.md
-│       ├── git-workflow.md
-│       ├── code-versioning.md
-│       └── worktree-dev-cycle.md
-└── docs/
-    └── guides/
-        └── agent-messaging-complete-guide.md   # Detailed implementation guide
+└── .claude/
+    ├── agents/                                  # Shared agent templates
+    │   ├── README.md
+    │   ├── testing-agent.md
+    │   └── janitor-agent.md
+    ├── skills/                                  # Shared skills (living docs)
+    │   ├── README.md
+    │   └── rate-limit-diagnostics/
+    │       └── SKILL.md
+    ├── commands/                                # Shared commands
+    │   ├── README.md
+    │   ├── fact-check.md
+    │   └── proof.md
+    └── guides/                                  # Shared guides
+        ├── autonomous-cycle.md
+        ├── agent-messaging.md
+        ├── github-labels.md
+        ├── pr-guidelines.md
+        ├── lint-and-hooks.md
+        ├── git-workflow.md
+        ├── code-versioning.md
+        └── worktree-dev-cycle.md
 ```
 
 ### Symlink Structure

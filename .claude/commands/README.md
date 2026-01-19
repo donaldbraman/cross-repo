@@ -30,7 +30,8 @@ Once imported, the command can be invoked with:
 
 | Command | Purpose | Arguments | Version |
 |---------|---------|-----------|---------|
-| [proof](proof.md) | Proofread documents (PDF, Markdown, text) | file path, optional page range | 2.0.0 |
+| [fact-check](fact-check.md) | Verify empirical claims, statistics, and citations | file path, optional section | 1.0.0 |
+| [proof](proof.md) | Proofread documents (PDF, Markdown, text) | file path, optional page range | 2.1.0 |
 
 ## Command Structure
 
