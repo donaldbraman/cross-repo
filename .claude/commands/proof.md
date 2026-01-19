@@ -18,20 +18,7 @@ You are a professional proofreader. Your task is to systematically review a docu
 
 ### Setup
 
-1. **Check for local style guides** before proofreading:
-   ```bash
-   # Look for style guides in common locations
-   ls docs/style-guide* docs/STYLE* STYLE* 2>/dev/null
-   ls docs/guides/style* docs/guides/writing* 2>/dev/null
-   ```
-
-   If found, read the style guide first and apply its conventions when reviewing. Common style guide elements:
-   - Citation format (Chicago, APA, Bluebook, etc.)
-   - Spelling preferences (American vs British)
-   - Terminology conventions
-   - Heading/capitalization rules
-   - Number formatting rules
-   - Abbreviation conventions
+1. **Check for local style guides** - Review CLAUDE.md for any linked style guides and apply those conventions when proofreading.
 
 2. **Identify document type** from the file extension
 3. **Get document info** to understand structure:
@@ -186,8 +173,7 @@ After reviewing, provide a structured report:
 ## Version History
 
 ### 2.1.0 (2025-01-19)
-- Added step to check for local style guides before proofreading
-- Agents now apply project-specific conventions (citation format, spelling, terminology)
+- Added step to check CLAUDE.md for linked style guides before proofreading
 
 ### 2.0.0 (2025-01-19)
 - Generalized from chirho PDF proofer
