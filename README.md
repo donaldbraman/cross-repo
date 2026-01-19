@@ -88,8 +88,7 @@ See [Commands README](.claude/commands/README.md) for usage.
 
 Located in `.claude/guides/`:
 
-- **[worktree-dev-cycle.md](.claude/guides/worktree-dev-cycle.md)**: Git worktree workflow for multi-agent development
-- **[autonomous-cycle.md](.claude/guides/autonomous-cycle.md)**: 8-step autonomous development cycle
+- **[autonomous-cycle.md](.claude/guides/autonomous-cycle.md)**: 6-step worktree-based autonomous development cycle
 - **[agent-messaging.md](.claude/guides/agent-messaging.md)**: Agent-to-agent communication protocol
 - **[github-labels.md](.claude/guides/github-labels.md)**: GitHub label conventions
 - **[pr-guidelines.md](.claude/guides/pr-guidelines.md)**: Pull request creation standards
@@ -209,8 +208,7 @@ cross-repo/
         ├── pr-guidelines.md
         ├── lint-and-hooks.md
         ├── git-workflow.md
-        ├── code-versioning.md
-        └── worktree-dev-cycle.md
+        └── code-versioning.md
 ```
 
 ### Symlink Structure

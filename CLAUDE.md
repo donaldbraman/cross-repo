@@ -16,7 +16,6 @@ Standard Dev Cycle: Analyze & Research → GitHub Issue & Worktree → Dev & Tes
 - ✅ ALWAYS fix hook failures by fixing code
 - ✅ ALWAYS use worktrees for isolated development
 - ✅ ALWAYS read step guides before executing:
-  - Step 2 (Worktree): `~/.claude/guides/worktree-dev-cycle.md`
   - Step 4 (Lint): `~/.claude/guides/lint-and-hooks.md`
   - Step 5 (PR): `~/.claude/guides/pr-guidelines.md`
 

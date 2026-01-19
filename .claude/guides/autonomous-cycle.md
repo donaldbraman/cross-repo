@@ -1,6 +1,6 @@
 # Autonomous Development Cycle
 
-**Version:** 2.0.0
+**Version:** 2.1.0
 **Last Updated:** 2025-01-19
 **Applies to:** All repositories
 
@@ -12,6 +12,38 @@
 4. **Lint** - Fix ALL pre-commit hook issues (see [lint-and-hooks.md](lint-and-hooks.md))
 5. **Commit, Push & Merge** - Create PR, squash merge (see [pr-guidelines.md](pr-guidelines.md))
 6. **Close & Cleanup** - Close issue, delete worktree
+
+## Why Worktrees?
+
+**Problem with branches:** When multiple agents work in the same repo directory, they constantly switch branches, causing:
+- Lost uncommitted work
+- File overwrites
+- Pre-commit hook failures that reset state
+- Context pollution between tasks
+
+**Worktree solution:** Each agent gets an isolated working directory with its own checked-out branch. No conflicts, no lost work.
+
+```
+Feature Branch (traditional)     │    Git Worktree
+─────────────────────────────────│─────────────────────────────
+repo/                            │    repo/           (main)
+├── .git/                        │    repo-worktrees/
+├── src/  ← only one branch      │    ├── feat-auth/  (feat/auth)
+└── ...      at a time           │    ├── feat-api/   (feat/api)
+                                 │    └── fix-bug/    (fix/bug-123)
+                                 │         ↑ all active simultaneously
+```
+
+## Directory Structure
+
+```
+~/Documents/GitHub/
+├── {repo}/                    # Main repo (main branch, kept clean)
+└── {repo}-worktrees/          # All worktrees for this repo
+    ├── issue-42/              # Worktree for issue #42
+    ├── issue-99/              # Worktree for issue #99
+    └── feat-new-api/          # Worktree for feature
+```
 
 ## Quick Reference
 
@@ -39,6 +71,16 @@ git worktree remove ../{repo}-worktrees/issue-{N}
 git pull origin main
 git worktree prune
 ```
+
+## Worktree Commands
+
+| Action | Command |
+|--------|---------|
+| List worktrees | `git worktree list` |
+| Create worktree | `git worktree add ../{repo}-worktrees/{name} -b {branch}` |
+| Remove worktree | `git worktree remove ../{repo}-worktrees/{name}` |
+| Prune stale | `git worktree prune` |
+| Check current branch | `git branch --show-current` |
 
 ## Critical Principles
 
@@ -107,16 +149,70 @@ git worktree prune
 
 Issue closes automatically if PR body contains "Closes #{N}".
 
-## Step-Specific Guides
+## Handling Existing Worktrees
 
-**Read just-in-time:**
-- **Step 2 (Worktree):** [worktree-dev-cycle.md](worktree-dev-cycle.md) - Worktree setup and management
-- **Step 4 (Lint):** [lint-and-hooks.md](lint-and-hooks.md) - Pre-commit hook handling
-- **Step 5 (PR):** [pr-guidelines.md](pr-guidelines.md) - PR creation standards
+```bash
+# Check existing worktrees
+git worktree list
+
+# If worktree exists, just cd to it
+cd ../{repo}-worktrees/issue-{N}
+
+# If branch exists but worktree doesn't
+git worktree add ../{repo}-worktrees/issue-{N} feat/{N}-description
+```
+
+## Troubleshooting
+
+### "fatal: '{branch}' is already checked out"
+Another worktree has this branch. Find it with `git worktree list`.
+
+### Worktree directory already exists
+```bash
+rm -rf ../{repo}-worktrees/{name}
+git worktree prune
+git worktree add ../{repo}-worktrees/{name} -b feat/{name}
+```
+
+### Lost work after branch switch
+This shouldn't happen with worktrees! If you're seeing branch switches, you're in the wrong directory. Always verify with `pwd` and `git branch`.
+
+### Pre-commit blocks commit to main
+This is expected! Create a worktree:
+```bash
+git worktree add ../{repo}-worktrees/my-feature -b feat/my-feature
+cd ../{repo}-worktrees/my-feature
+# Now you can commit
+```
+
+## Best Practices
+
+1. **One worktree per issue** - Don't reuse worktrees for different work
+2. **Stay in the worktree** - Don't cd to main repo while working
+3. **Commit frequently** - Protect against unexpected issues
+4. **Clean up after merge** - Remove worktrees to avoid clutter
+5. **Use absolute paths** - When referencing files, use full paths
+6. **Keep main clean** - Main repo directory should only have main branch
+
+## Parallel Agent Work
+
+With worktrees, multiple agents can work simultaneously:
+
+```
+Agent A: ~/GitHub/repo-worktrees/issue-42/     ← Working on issue 42
+Agent B: ~/GitHub/repo-worktrees/issue-99/     ← Working on issue 99
+Agent C: ~/GitHub/repo-worktrees/feat-api/     ← Working on API feature
+         ↑ All running in parallel, no conflicts
+```
+
+Each agent:
+- Has its own directory
+- Has its own branch checked out
+- Cannot interfere with other agents
+- Can commit and push independently
 
 ## Related Guides
 
-- [Worktree Dev Cycle](worktree-dev-cycle.md) - Detailed worktree workflow
 - [Lint & Hooks](lint-and-hooks.md) - Pre-commit hook handling
 - [PR Guidelines](pr-guidelines.md) - Pull request creation
 - [Git Workflow](git-workflow.md) - Branch and commit conventions
@@ -124,4 +220,4 @@ Issue closes automatically if PR body contains "Closes #{N}".
 
 ---
 
-*Last updated: 2025-01-19*
+*See also: [Git Worktree Documentation](https://git-scm.com/docs/git-worktree)*
