@@ -1,6 +1,6 @@
 # Document Proofreading Command
 
-**Version:** 3.2.0
+**Version:** 3.3.0
 **Last Updated:** 2025-01-20
 
 Proofread a document, generate corrections, and optionally apply them via git worktree.
@@ -38,7 +38,7 @@ You are a professional proofreader. Review the document systematically, generate
    - Check for `--report-only` flag
    - Determine if file is editable (not PDF)
 
-2. **Check for local style guides** - Review CLAUDE.md for any linked style guides and apply those conventions.
+2. **Check for local style guides** - Review CLAUDE.md for any linked style guides and apply those conventions. See [CONFIGURATION.md](../CONFIGURATION.md) for style guide configuration options.
 
 3. **Identify document type** from file extension
 
@@ -264,12 +264,17 @@ git worktree list   # Check existing worktrees
 ## Related
 
 - `/fact-check` - Verify empirical claims (different purpose)
+- [CONFIGURATION.md](../CONFIGURATION.md) - All CLAUDE.md configuration options
 - [correction-workflow](../guides/correction-workflow.md) - Shared apply logic
 - [lint-and-hooks](../guides/lint-and-hooks.md) - Pre-commit hook handling
 
 ---
 
 ## Version History
+
+### 3.3.0 (2025-01-20)
+- Added reference to CONFIGURATION.md for style guide options
+- Added CONFIGURATION.md to Related section
 
 ### 3.2.0 (2025-01-20)
 - Added Troubleshooting section
