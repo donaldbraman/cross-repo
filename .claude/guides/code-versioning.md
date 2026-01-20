@@ -1,6 +1,6 @@
 # Code Versioning Guide
 
-**Version:** 1.0.0
+**Version:** 1.0.1
 **Last Updated:** 2025-01-20
 **Applies to:** All repositories
 
@@ -167,10 +167,19 @@ Every guide must have a version header:
 - Updated dates
 - Example: `1.0.0 → 1.0.1`
 
-### Guide Changelog Pattern
+### Changelog Format
 
-Add a changelog section at the end of guides when making significant changes:
+Add a changelog section at the end of guides when making significant changes. Follow the [Keep a Changelog](https://keepachangelog.com/) format:
 
+**Standard Sections:**
+- **Added:** New features
+- **Changed:** Changes in existing functionality
+- **Deprecated:** Soon-to-be removed features
+- **Removed:** Removed features
+- **Fixed:** Bug fixes
+- **Security:** Security vulnerabilities
+
+**Simple Format (for guides):**
 ```markdown
 ## Changelog
 
@@ -183,13 +192,36 @@ Add a changelog section at the end of guides when making significant changes:
 - Initial release
 ```
 
+**Detailed Format (for projects/APIs):**
+```markdown
+## Changelog
+
+### [2.0.0] - 2025-10-14
+
+#### Added
+- v3 API with hybrid search
+- Client-controlled weighting
+
+#### Changed
+- Default min_score from 0.7 to 0.3
+
+#### Fixed
+- Missing title metadata handling
+
+### [1.0.0] - 2025-10-01
+
+#### Added
+- Initial release
+- v1 and v2 APIs
+```
+
 **When to add changelog:**
 - ✅ MAJOR or MINOR version bumps
 - ❌ PATCH bumps (too granular)
 
 **Where to add:**
 - At end of guide, before final "Last updated" footer
-- Or in separate CHANGELOG.md file for this repository
+- Or in separate CHANGELOG.md file for projects
 
 ### Guide Versioning Example
 
@@ -216,45 +248,6 @@ Add a changelog section at the end of guides when making significant changes:
 
 *Last updated: 2025-11-10*
 ```
-
-## Change Log
-
-### Format
-```markdown
-# Changelog
-
-## [2.0.0] - 2025-10-14
-
-### Added
-- v3 API with hybrid search
-- Client-controlled weighting
-
-### Changed
-- Default min_score from 0.7 to 0.3
-
-### Deprecated
-- None
-
-### Removed
-- None
-
-### Fixed
-- Missing title metadata handling
-
-## [1.0.0] - 2025-10-01
-
-### Added
-- Initial release
-- v1 and v2 APIs
-```
-
-### Sections
-- **Added:** New features
-- **Changed:** Changes in existing functionality
-- **Deprecated:** Soon-to-be removed features
-- **Removed:** Removed features
-- **Fixed:** Bug fixes
-- **Security:** Security vulnerabilities
 
 ## Version Communication
 

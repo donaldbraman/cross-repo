@@ -272,6 +272,8 @@ git worktree list   # Check existing worktrees
 
 ## Version History
 
+See [CHANGELOG-proof.md](./CHANGELOG-proof.md) for full version history.
+
 ### 3.3.0 (2025-01-20)
 - Added reference to CONFIGURATION.md for style guide options
 - Added CONFIGURATION.md to Related section
@@ -281,7 +283,7 @@ git worktree list   # Check existing worktrees
 - Added Related section
 
 ### 3.1.0 (2025-01-20)
-- Standardized terminology: "Phase" → "Step"
+- Standardized terminology: "Phase" -> "Step"
 - Simplified correction workflow reference (removed inline duplication)
 
 ### 3.0.0 (2025-01-19)
@@ -290,13 +292,3 @@ git worktree list   # Check existing worktrees
 - Added --report-only flag
 - Standardized correction report format
 - Integrated with correction-workflow.md guide
-
-### 2.1.0 (2025-01-19)
-- Added step to check CLAUDE.md for linked style guides
-
-### 2.0.0 (2025-01-19)
-- Generalized from chirho PDF proofer
-- Added support for Markdown and plain text
-
-### 1.0.0
-- Initial PDF-specific implementation
