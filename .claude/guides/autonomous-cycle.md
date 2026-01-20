@@ -1,7 +1,7 @@
 # Autonomous Development Cycle
 
-**Version:** 2.1.0
-**Last Updated:** 2025-01-19
+**Version:** 2.1.1
+**Last Updated:** 2025-01-20
 **Applies to:** All repositories
 
 ## 6-Step Cycle
@@ -123,9 +123,13 @@ Work entirely within the worktree directory:
 
 ### Step 4: Lint
 
-Before committing, ensure all hooks pass. See [lint-and-hooks.md](lint-and-hooks.md) for guidance.
-- Run `git add . && git commit`
-- If hooks fail, fix the code and retry
+**Reference:** [lint-and-hooks.md](lint-and-hooks.md) for complete guidance.
+
+```bash
+git add . && git commit -m "<type>: <description>"
+```
+
+If hooks fail, fix code and retry. Never use `--no-verify`.
 
 ### Step 5: Commit, Push & Merge
 
