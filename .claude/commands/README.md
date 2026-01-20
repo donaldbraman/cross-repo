@@ -1,7 +1,7 @@
 # Shared Commands
 
-**Version:** 1.0.0
-**Last Updated:** 2025-01-19
+**Version:** 1.1.0
+**Last Updated:** 2025-01-20
 
 ## Overview
 
@@ -96,6 +96,41 @@ Projects can have local commands in their `.claude/commands/` directory that:
 - Extend shared commands with project-specific behavior
 - Handle project-specific operations
 - Override shared commands if needed (local takes precedence)
+
+## Reference Documents
+
+Supporting documentation for commands and workflows:
+
+### Core References
+
+| Document | Description |
+|----------|-------------|
+| [GLOSSARY.md](../GLOSSARY.md) | Central terminology definitions used across all documentation |
+| [CONFIGURATION.md](../CONFIGURATION.md) | All CLAUDE.md configuration options for customizing commands |
+| [TROUBLESHOOTING.md](../TROUBLESHOOTING.md) | Consolidated troubleshooting hub for common issues |
+
+### Templates
+
+| Template | Description |
+|----------|-------------|
+| [correction-report-schema.md](../templates/correction-report-schema.md) | Standard schema for correction reports used by `/proof` and `/fact-check` |
+
+### Worked Examples
+
+| Example | Description |
+|---------|-------------|
+| [examples/](../examples/README.md) | Directory of worked examples demonstrating complex workflows |
+
+### Guides
+
+Detailed workflow guides are available in the [guides/](../guides/) directory:
+
+| Guide | Description |
+|-------|-------------|
+| [autonomous-cycle.md](../guides/autonomous-cycle.md) | Full development workflow with worktrees |
+| [correction-workflow.md](../guides/correction-workflow.md) | Applying corrections from reports |
+| [lint-and-hooks.md](../guides/lint-and-hooks.md) | Pre-commit hook handling |
+| [pr-guidelines.md](../guides/pr-guidelines.md) | Pull request creation standards |
 
 ---
 
