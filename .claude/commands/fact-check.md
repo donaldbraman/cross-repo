@@ -1,16 +1,16 @@
 # Fact-Check Command
 
-**Version:** 1.0.0
+**Version:** 2.0.0
 **Last Updated:** 2025-01-19
 
-Systematic verification of empirical claims, statistics, and citations against original sources.
+Verify empirical claims against original sources, generate corrections, and optionally apply them via git worktree.
 
 ## Quick Reference
 
 | Command | Action |
 |---------|--------|
-| `/fact-check` | Fact-check current document or all documents |
-| `/fact-check path/to/file.md` | Fact-check specific file |
+| `/fact-check path/to/file.md` | Fact-check and apply corrections |
+| `/fact-check path/to/file.md --report-only` | Generate report without applying |
 | `/fact-check --section "Results"` | Fact-check specific section only |
 | `/fact-check --sequential` | Disable parallel execution |
 
@@ -377,19 +377,49 @@ Run `/apply [report-path]` to apply corrections automatically (if /apply command
 
 ### Phase 7: Apply Corrections
 
-After generating the report, offer options:
+**If `--report-only` was passed:**
+- Present report only
+- Suggest: "Run without --report-only to apply corrections"
+- Stop here
 
-**Option A: Automatic application (if /apply available)**
-```
-Run `/apply [report-path]` to apply corrections with verification.
-```
+**If corrections found:**
 
-**Option B: Manual application**
-If user prefers manual fixes:
-1. Correct factual errors using Edit tool
-2. Add [citation needed] flags for unverified claims
-3. Update statistics to match sources
-4. Fix broken URLs or note them as inaccessible
+Follow the [correction-workflow](../guides/correction-workflow.md):
+
+1. Create worktree to isolate changes
+2. Apply each correction using Edit tool (bottom-to-top)
+3. Show git diff of changes
+4. Present options: approve / reject / keep
+
+**If no corrections needed:**
+- Report: "All claims verified! No corrections needed."
+
+---
+
+### Phase 8: Report Results
+
+After user decision:
+
+```markdown
+## Fact-Check Complete
+
+**Document:** [filename]
+**Claims Verified:** X
+**Corrections:** Y applied, Z skipped
+**Status:** [Merged to main / Rejected / Kept for review]
+
+### Accuracy Summary
+- Supported: X
+- Corrections applied: Y
+- Unable to verify: Z
+
+### Changes Made
+- Line 89: 39% → 36% (source: Smith 2023)
+- Line 156: Added citation
+
+### Skipped
+- Line 203: Unable to verify (source not found)
+```
 
 ---
 
@@ -505,18 +535,34 @@ Additional: [Domain-specific category 1], [Category 2]
 
 ---
 
+## Flags
+
+| Flag | Effect |
+|------|--------|
+| `--report-only` | Generate report without applying corrections |
+| `--sequential` | Disable parallel execution |
+| `--auto-approve` | Apply and merge without prompting |
+| `--section "X"` | Only fact-check named section |
+
+---
+
 ## Version History
+
+### 2.0.0 (2025-01-19)
+- Added worktree-based correction workflow
+- Auto-applies corrections with git as undo mechanism
+- Added --report-only flag
+- Integrated with correction-workflow.md guide
+- Added Phase 8 for results reporting
 
 ### 1.0.0 (2025-01-19)
 - Initial cross-repo release
 - Generalized from criminal-law project-specific version
 - Made verification tools configurable via CLAUDE.md
-- Removed hardcoded paths
-- Added Phase 0 for configuration detection
 
 ---
 
-## Related Commands
+## Related
 
 - `/proof` - Formatting and style checks (different purpose)
-- `/apply` - Apply corrections from generated report (if available)
+- [correction-workflow](../guides/correction-workflow.md) - Shared apply logic
