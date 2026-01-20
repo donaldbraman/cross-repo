@@ -252,6 +252,15 @@ Before reporting completion, verify:
 
 ---
 
+## Related
+
+- [autonomous-cycle](../guides/autonomous-cycle.md) - Detailed guide for worktree-based development
+- [lint-and-hooks](../guides/lint-and-hooks.md) - Pre-commit hook handling
+- [pr-guidelines](../guides/pr-guidelines.md) - Pull request creation standards
+- `/push` - Quick commit and push (for simpler changes)
+
+---
+
 ## Version History
 
 ### 1.0.0 (2025-01-19)
