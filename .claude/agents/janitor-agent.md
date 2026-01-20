@@ -1,8 +1,8 @@
 # Janitor Agent
 
-**Version:** 2.0.0
+**Version:** 2.1.0
 **Created:** 2024-11-14
-**Last Updated:** 2025-01-19
+**Last Updated:** 2025-01-20
 **Agent Type:** general-purpose
 
 ## Purpose
@@ -329,6 +329,9 @@ Do NOT ask for user input. Just report and exit.
 
 ## Version History
 
+### 2.1.0 (2025-01-20)
+- Added Validation Checklist section with initial test case, safety checks, and common failure modes
+
 ### 2.0.0 (2025-01-19)
 - Consolidated cite-assist repo-janitor-agent and write-assist janitor-agent
 - Generalized for cross-repo sharing
@@ -378,6 +381,121 @@ Task tool with:
 - description: "Complete repository audit"
 - subagent_type: "general-purpose"
 - prompt: <contents of this file with scope=thorough, auto_fix=false>
+```
+
+## Validation Checklist
+
+Use this checklist to verify the janitor agent works correctly before relying on it.
+
+### Initial Test Case
+
+**Minimal verification test:**
+```
+Task tool with:
+- description: "Verify janitor agent"
+- subagent_type: "general-purpose"
+- prompt: "Run quick hygiene scan with scope=quick, auto_fix=false, dry_run=true"
+```
+
+**What to check:**
+1. Agent detects it's in a git repository
+2. Agent scans root directory for misplaced files
+3. Agent checks untracked files via git status
+4. Agent returns structured report (not raw command output)
+
+### Expected Output Format
+
+**Report should include:**
+- Summary section with issue counts (Total, Critical, Warnings, Info)
+- Issues organized by severity
+- Specific file paths for each issue
+- Actionable recommendations
+
+**Report should NOT include:**
+- Raw git command output
+- User prompts or questions
+- Modifications (when dry_run=true)
+
+### Success Criteria
+
+| Criterion | How to Verify |
+|-----------|---------------|
+| Git detection | Agent confirms repository status |
+| Root scan | Agent lists files in root directory |
+| Untracked analysis | Agent runs git status and categorizes files |
+| Large file detection | Agent finds files >5MB (scope >= standard) |
+| Branch hygiene | Agent lists merged/stale branches (scope >= standard) |
+| Report format | Output follows structured template with severities |
+| Safe operation | No files modified when auto_fix=false |
+| Dry run works | Reports what would change without changing |
+
+### Safety Verification
+
+**Critical safety checks before enabling auto_fix:**
+
+| Check | Command | Expected |
+|-------|---------|----------|
+| Git status clean | `git status --short` | No uncommitted changes |
+| Backup exists | `git stash list` or branch backup | Recent backup available |
+| Dry run first | Run with `dry_run=true` | Review proposed changes |
+| Scope understood | Check scope parameter | Know what will be scanned |
+
+### Common Failure Modes and Fixes
+
+| Failure Mode | Symptoms | Fix |
+|--------------|----------|-----|
+| Not a git repo | "fatal: not a git repository" | Run from within a git repository |
+| No gh CLI | Issue analysis fails | Install GitHub CLI or set `include_issues=false` |
+| Permission denied | Cannot read files | Check file/directory permissions |
+| Timeout on large repo | Scan never completes | Use `scope=quick` for initial test |
+| False positives | Reports intentional files as issues | Review and document exceptions |
+| Missing .gitignore | Many untracked file warnings | Create basic .gitignore first |
+| Remote access denied | Branch cleanup fails | Set `skip_remote=true` |
+| Auto-fix too aggressive | Unexpected .gitignore changes | Always dry_run first |
+
+### Pre-flight Safety Checklist
+
+Before running with `auto_fix=true`:
+
+```bash
+# 1. Verify clean git state
+git status --short
+# Should be empty or only expected changes
+
+# 2. Check current .gitignore
+cat .gitignore 2>/dev/null || echo "No .gitignore exists"
+
+# 3. Verify you're in the right repository
+git remote -v
+pwd
+
+# 4. Run dry_run first
+# Use janitor agent with: scope=standard, auto_fix=false, dry_run=true
+# Review the report before enabling auto_fix
+
+# 5. Create backup branch (optional but recommended)
+git checkout -b backup/pre-janitor-$(date +%Y%m%d) 2>/dev/null && git checkout -
+```
+
+### Quick Validation Script
+
+Run these commands to validate agent readiness:
+
+```bash
+# 1. Verify git repository
+git rev-parse --git-dir >/dev/null 2>&1 && echo "Git repository: OK" || echo "Not a git repository"
+
+# 2. Check for untracked files (what janitor will analyze)
+git status --short | grep '^??' | head -5
+
+# 3. Check for large files (what janitor will find)
+find . -type f -size +5M ! -path "./.git/*" ! -path "./node_modules/*" 2>/dev/null | head -5
+
+# 4. Check branch status
+git branch --merged main 2>/dev/null | grep -v '^\*' | head -5
+
+# 5. Check worktree status
+git worktree list
 ```
 
 ---

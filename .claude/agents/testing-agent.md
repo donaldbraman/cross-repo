@@ -1,8 +1,8 @@
 # Testing Agent
 
-**Version:** 2.0.0
+**Version:** 2.1.0
 **Created:** 2024-10-14
-**Last Updated:** 2025-01-19
+**Last Updated:** 2025-01-20
 **Agent Type:** general-purpose
 
 ## Purpose
@@ -137,6 +137,9 @@ Provide actionable summary:
 
 ## Version History
 
+### 2.1.0 (2025-01-20)
+- Added Validation Checklist section with initial test case, success criteria, and common failure modes
+
 ### 2.0.0 (2025-01-19)
 - Generalized for cross-repo sharing
 - Added auto-detection of test frameworks
@@ -185,6 +188,83 @@ Task tool with:
 - description: "Run all tests verbose"
 - subagent_type: "general-purpose"
 - prompt: <contents with test_suite=all, verbose=true>
+```
+
+## Validation Checklist
+
+Use this checklist to verify the testing agent works correctly before relying on it.
+
+### Initial Test Case
+
+**Minimal verification test:**
+```
+Task tool with:
+- description: "Verify testing agent"
+- subagent_type: "general-purpose"
+- prompt: "Run smoke tests and report results using test_suite=smoke"
+```
+
+**What to check:**
+1. Agent detects project type correctly (Python/Node/Rust/Go)
+2. Agent finds the test directory or reports if missing
+3. Agent executes appropriate test command
+4. Agent returns structured output (not raw test runner output)
+
+### Expected Output Format
+
+**Success case should include:**
+- "All tests passed" or "TEST FAILURE" header
+- Suite name identification
+- Test count (X/X format)
+- Duration in seconds
+
+**Failure case should include:**
+- Test name and file location
+- Error type and message
+- Relevant context for debugging
+
+### Success Criteria
+
+| Criterion | How to Verify |
+|-----------|---------------|
+| Test discovery | Agent finds tests in standard locations (tests/, src/tests/) |
+| Framework detection | Agent uses correct runner (pytest, jest, cargo, go test) |
+| Execution | Tests actually run (check for timing info in output) |
+| Reporting | Output follows standardized format, not raw runner output |
+| Failure capture | Intentionally failing test is reported with file:line |
+| Timeout handling | Long-running test triggers timeout warning |
+
+### Common Failure Modes and Fixes
+
+| Failure Mode | Symptoms | Fix |
+|--------------|----------|-----|
+| No tests found | "0 tests collected" or empty report | Verify `test_path` parameter; check tests directory exists |
+| Wrong framework | Command fails immediately | Check project files (pyproject.toml, package.json, etc.) exist |
+| Missing dependencies | Import errors in test output | Run package install first (uv sync, npm install, etc.) |
+| Service unavailable | Connection refused errors | Start required services before running integration tests |
+| Timeout exceeded | Report never returns | Use `timeout_override` parameter or reduce test scope |
+| Raw output leak | Seeing full pytest/jest output | Agent not parsing correctly; check prompt template |
+| Permission denied | Test files inaccessible | Check file permissions on test directory |
+
+### Quick Validation Script
+
+Run these commands to validate agent readiness:
+
+```bash
+# 1. Verify test directory exists
+ls -la tests/ 2>/dev/null || ls -la src/tests/ 2>/dev/null || echo "No standard test directory found"
+
+# 2. Verify test framework config exists
+[ -f pyproject.toml ] && echo "Python project detected"
+[ -f package.json ] && echo "Node project detected"
+[ -f Cargo.toml ] && echo "Rust project detected"
+[ -f go.mod ] && echo "Go project detected"
+
+# 3. Verify test command works manually
+# Python: uv run pytest tests/ -v --collect-only
+# Node: npm test -- --listTests
+# Rust: cargo test --no-run
+# Go: go test ./... -list '.*'
 ```
 
 ---
