@@ -1,7 +1,7 @@
 # Document Proofreading Command
 
-**Version:** 3.0.0
-**Last Updated:** 2025-01-19
+**Version:** 3.1.0
+**Last Updated:** 2025-01-20
 
 Proofread a document, generate corrections, and optionally apply them via git worktree.
 
@@ -31,7 +31,7 @@ You are a professional proofreader. Review the document systematically, generate
 
 ---
 
-### Phase 1: Setup
+### Step 1: Setup
 
 1. **Parse arguments:**
    - Extract file path from `$ARGUMENTS`
@@ -61,7 +61,7 @@ You are a professional proofreader. Review the document systematically, generate
 
 ---
 
-### Phase 2: Document Review
+### Step 2: Document Review
 
 #### For PDF Documents
 
@@ -118,7 +118,7 @@ grep -n "\?\?" "$FILE"
 
 ---
 
-### Phase 3: Generate Corrections Report
+### Step 3: Generate Corrections Report
 
 Format corrections for the [correction-workflow](../guides/correction-workflow.md):
 
@@ -185,7 +185,7 @@ Format corrections for the [correction-workflow](../guides/correction-workflow.m
 
 ---
 
-### Phase 4: Apply Corrections
+### Step 4: Apply Corrections
 
 **If `--report-only` OR file is PDF:**
 - Present report only
@@ -193,20 +193,14 @@ Format corrections for the [correction-workflow](../guides/correction-workflow.m
 - Stop here
 
 **If editable file and corrections found:**
-
-Follow the [correction-workflow](../guides/correction-workflow.md):
-
-1. Create worktree to isolate changes
-2. Apply each correction using Edit tool
-3. Show git diff of changes
-4. Present options: approve / reject / keep
+Follow the [correction-workflow](../guides/correction-workflow.md) guide.
 
 **If no corrections found:**
 - Report: "No corrections needed. Document looks good!"
 
 ---
 
-### Phase 5: Report Results
+### Step 5: Report Results
 
 After user decision (or for report-only):
 
@@ -248,6 +242,10 @@ After user decision (or for report-only):
 ---
 
 ## Version History
+
+### 3.1.0 (2025-01-20)
+- Standardized terminology: "Phase" → "Step"
+- Simplified correction workflow reference (removed inline duplication)
 
 ### 3.0.0 (2025-01-19)
 - Added worktree-based correction workflow

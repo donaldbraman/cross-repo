@@ -1,7 +1,7 @@
 # Fact-Check Command
 
-**Version:** 2.0.0
-**Last Updated:** 2025-01-19
+**Version:** 2.1.0
+**Last Updated:** 2025-01-20
 
 Verify empirical claims against original sources, generate corrections, and optionally apply them via git worktree.
 
@@ -28,11 +28,11 @@ Unlike `/proof` (which checks formatting and style), `/fact-check` verifies **em
 
 ## Instructions
 
-When the user runs `/fact-check [file]`, execute the following phases:
+When the user runs `/fact-check [file]`, execute the following steps:
 
 ---
 
-### Phase 0: Configuration
+### Step 0: Configuration
 
 1. **Check CLAUDE.md for project-specific settings:**
    - Verification tools (local search APIs, external databases)
@@ -60,7 +60,7 @@ If no configuration found, use defaults (web search only, standard categories).
 
 ---
 
-### Phase 1: Extract Claims
+### Step 1: Extract Claims
 
 Read the document and identify all verifiable claims:
 
@@ -96,7 +96,7 @@ Create a list of claims to verify:
 
 ---
 
-### Phase 2: Prioritize
+### Step 2: Prioritize
 
 Rank claims by importance:
 
@@ -112,7 +112,7 @@ For a typical document:
 
 ---
 
-### Phase 3: Decompose Complex Claims
+### Step 3: Decompose Complex Claims
 
 Break compound claims into atomic facts:
 
@@ -127,7 +127,7 @@ Atomic facts:
 
 ---
 
-### Phase 4: Verify Each Claim
+### Step 4: Verify Each Claim
 
 For each claim, search for the original source using a **tiered approach**:
 
@@ -194,11 +194,11 @@ Rate confidence:
 
 ---
 
-### Phase 5: Dynamic Parallel Execution (Default)
+### Step 5: Dynamic Parallel Execution (Default)
 
 **Parallelization is the default behavior.** The command dynamically determines parallelization based on claim density.
 
-#### Step 1: Quick Claim Count
+**Part A: Quick Claim Count**
 
 Before spawning agents, do a rapid scan to count verifiable claims per section:
 
@@ -212,7 +212,7 @@ For each section:
 
 **Threshold:** If a section has >15 estimated claims, subdivide it further before spawning agents.
 
-#### Step 2: Detect Document Sections
+**Part B: Detect Document Sections**
 
 Scan the document for substantive divisions:
 
@@ -223,7 +223,7 @@ grep -n "^## " [file] | head -20
 
 Identify discrete sections that can be checked independently.
 
-#### Step 3: Adaptive Section Splitting
+**Part C: Adaptive Section Splitting**
 
 Apply claim-based splitting:
 
@@ -250,7 +250,7 @@ Document analysis:
 Spawning 4 parallel agents...
 ```
 
-#### Step 4: Spawn Agents
+**Part D: Spawn Agents**
 
 Launch parallel agents using the Task tool:
 
@@ -283,7 +283,7 @@ Output your findings in the standardized corrections format with:
 Return your findings when complete.
 ```
 
-#### Step 5: Synthesize Results
+**Part E: Synthesize Results**
 
 After all agents complete:
 1. Collect all findings from subagents
@@ -295,7 +295,7 @@ After all agents complete:
 
 ---
 
-### Phase 6: Generate Report
+### Step 6: Generate Report
 
 Save the report to the configured report directory (default: `temp/`) with filename `fact-check-report-YYYY-MM-DD-HHMMSS.md`:
 
@@ -375,7 +375,7 @@ Run `/apply [report-path]` to apply corrections automatically (if /apply command
 
 ---
 
-### Phase 7: Apply Corrections
+### Step 7: Apply Corrections
 
 **If `--report-only` was passed:**
 - Present report only
@@ -383,20 +383,14 @@ Run `/apply [report-path]` to apply corrections automatically (if /apply command
 - Stop here
 
 **If corrections found:**
-
-Follow the [correction-workflow](../guides/correction-workflow.md):
-
-1. Create worktree to isolate changes
-2. Apply each correction using Edit tool (bottom-to-top)
-3. Show git diff of changes
-4. Present options: approve / reject / keep
+Follow the [correction-workflow](../guides/correction-workflow.md) guide.
 
 **If no corrections needed:**
 - Report: "All claims verified! No corrections needed."
 
 ---
 
-### Phase 8: Report Results
+### Step 8: Report Results
 
 After user decision:
 
@@ -548,12 +542,17 @@ Additional: [Domain-specific category 1], [Category 2]
 
 ## Version History
 
+### 2.1.0 (2025-01-20)
+- Standardized terminology: "Phase" → "Step"
+- Simplified correction workflow reference (removed inline duplication)
+- Renamed sub-steps in Step 5 to "Part A-E" to avoid confusion
+
 ### 2.0.0 (2025-01-19)
 - Added worktree-based correction workflow
 - Auto-applies corrections with git as undo mechanism
 - Added --report-only flag
 - Integrated with correction-workflow.md guide
-- Added Phase 8 for results reporting
+- Added Step 8 for results reporting
 
 ### 1.0.0 (2025-01-19)
 - Initial cross-repo release

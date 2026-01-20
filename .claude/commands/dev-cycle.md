@@ -108,6 +108,8 @@ You are executing an autonomous development cycle. Complete all 6 steps without 
 
 ### Step 4: Lint
 
+See [lint-and-hooks](../guides/lint-and-hooks.md) for detailed guidance.
+
 1. **Attempt commit:**
    ```bash
    git add .

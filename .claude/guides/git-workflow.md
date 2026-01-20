@@ -81,7 +81,7 @@ Co-Authored-By: Claude <noreply@anthropic.com>
 - ✅ Imperative mood ("Move cursor to..." not "Moves cursor to...")
 - ✅ Focus on "why" not "what" (code shows what)
 - ✅ Reference issue numbers
-- ❌ Never use `--no-verify`
+- ❌ Never bypass pre-commit hooks (see [lint-and-hooks.md](lint-and-hooks.md))
 
 ## Pull Request Workflow
 
@@ -135,25 +135,7 @@ git branch -D feature/xxx
 
 ## Pre-commit Hooks
 
-### Hook Behavior
-- Runs automatically before each commit
-- Performs linting, formatting, type checking
-- Cannot be bypassed with `--no-verify` in autonomous mode
-
-### Hook Failure Response
-1. **Fix the code** (never bypass)
-2. Stage fixes: `git add <files>`
-3. Retry commit
-
-### Amend After Hook
-If hook modifies files:
-```bash
-# Check authorship first
-git log -1 --format='%an %ae'
-
-# Only amend if you're the author and haven't pushed
-git commit --amend --no-edit
-```
+See [lint-and-hooks.md](lint-and-hooks.md) for detailed guidance on handling pre-commit hooks.
 
 ## Troubleshooting
 

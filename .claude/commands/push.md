@@ -128,7 +128,7 @@ Working tree clean. Nothing to push.
 ```
 
 ### Pre-commit hooks fail
-Fix the issues (never use `--no-verify`), then retry:
+Fix the issues (see [lint-and-hooks](../guides/lint-and-hooks.md)), then retry:
 ```bash
 git add .
 git commit -m "..."
