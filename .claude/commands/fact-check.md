@@ -1,6 +1,6 @@
 # Fact-Check Command
 
-**Version:** 2.2.0
+**Version:** 2.3.0
 **Last Updated:** 2025-01-20
 
 Verify empirical claims against original sources, generate corrections, and optionally apply them via git worktree.
@@ -42,19 +42,7 @@ When the user runs `/fact-check [file]`, execute the following steps:
 
 2. **Check for linked style guides** that may define citation formats or terminology standards.
 
-Example CLAUDE.md configuration:
-```markdown
-## Fact-Check Configuration
-
-**Verification Tools:**
-- Local: cite-assist API at localhost:8000
-- External: discovery CLI for OpenAlex/Semantic Scholar
-
-**Claim Categories:**
-- Statistics, Study findings, Citations, URLs, Legal holdings
-
-**Report Directory:** temp/
-```
+See [CONFIGURATION.md](../CONFIGURATION.md) for all available options and examples.
 
 If no configuration found, use defaults (web search only, standard categories).
 
@@ -508,24 +496,7 @@ Common errors:
 
 ## Project Configuration
 
-Projects can customize fact-checking by adding to their CLAUDE.md:
-
-```markdown
-## Fact-Check Configuration
-
-### Verification Tools
-- **Local search:** [tool name] at [endpoint]
-- **External search:** [tool name] for [database]
-- **Domain sources:** site:[domain1], site:[domain2]
-
-### Claim Categories
-Standard: Statistics, Study findings, Citations, URLs
-Additional: [Domain-specific category 1], [Category 2]
-
-### Report Settings
-- **Output directory:** temp/
-- **Apply command:** /apply (if available)
-```
+Projects can customize fact-checking by adding configuration to their CLAUDE.md. See [CONFIGURATION.md](../CONFIGURATION.md) for all available options, detailed descriptions, and examples.
 
 ---
 
@@ -568,6 +539,10 @@ git worktree list   # Check existing worktrees
 
 See [CHANGELOG-fact-check.md](./CHANGELOG-fact-check.md) for full version history.
 
+### 2.3.0 (2025-01-20)
+- Extracted configuration examples to central CONFIGURATION.md
+- Added reference to CONFIGURATION.md in Related section
+
 ### 2.2.0 (2025-01-20)
 - Added Troubleshooting section
 
@@ -588,4 +563,5 @@ See [CHANGELOG-fact-check.md](./CHANGELOG-fact-check.md) for full version histor
 ## Related
 
 - `/proof` - Formatting and style checks (different purpose)
+- [CONFIGURATION.md](../CONFIGURATION.md) - All CLAUDE.md configuration options
 - [correction-workflow](../guides/correction-workflow.md) - Shared apply logic
