@@ -1,6 +1,6 @@
 # Fact-Check Command
 
-**Version:** 2.3.0
+**Version:** 2.4.0
 **Last Updated:** 2025-01-20
 
 Verify empirical claims against original sources, generate corrections, and optionally apply them via git worktree.
@@ -285,81 +285,20 @@ After all agents complete:
 
 ### Step 6: Generate Report
 
-Save the report to the configured report directory (default: `temp/`) with filename `fact-check-report-YYYY-MM-DD-HHMMSS.md`:
+Save the report to the configured report directory (default: `temp/`) with filename `fact-check-report-YYYY-MM-DD-HHMMSS.md`.
 
-```markdown
-## Corrections Report: [Document Name]
+Format corrections following the [Correction Report Schema](../templates/correction-report-schema.md). The fact-check report extends the base schema with:
 
-**Source:** /fact-check
-**Generated:** [timestamp]
-**Target:** [file path]
-
----
-
-### Summary
-
-| Verdict | Count |
-|---------|-------|
-| Supported | X |
-| Partially Supported | X |
-| Unsupported | X |
-| Contradicted | X |
-| Unable to Verify | X |
-
-**Accuracy Rate:** X% of verifiable claims supported
-
-| Category | Count |
-|----------|-------|
-| Errors (must fix) | X |
-| Warnings (should fix) | X |
-| Suggestions (consider) | X |
-
----
-
-### Corrections
-
-#### [1] [Short description]
-
-- **Location:** `[file:line]`
-- **Severity:** Error | Warning | Suggestion
-- **Category:** Statistic | Citation | Study Finding | [Domain-specific]
-- **Context (before):**
-  ```
-  [2-3 lines including the claim to correct]
-  ```
-- **Issue:** [What's wrong - the discrepancy]
-- **Suggested fix:**
-  ```
-  [Corrected text with same context]
-  ```
-- **Source:** [Original source with citation]
-- **Confidence:** High | Medium | Low
-
-#### [2] [Short description]
-...
-
----
-
-### Verified Claims
-
-| Line | Claim Summary | Source | Confidence |
-|------|---------------|--------|------------|
-| XX | [brief] | [citation] | High |
-
----
-
-### Unable to Verify
-
-| Line | Claim | Reason |
-|------|-------|--------|
-| XX | [claim] | [why couldn't verify] |
-
----
-
-### Next Steps
-
-Run `/apply [report-path]` to apply corrections automatically (if /apply command available).
-```
+1. **Header** with source (`/fact-check`), timestamp, and target file path
+2. **Summary tables:**
+   - Verdict counts (Supported, Partially Supported, Unsupported, Contradicted, Unable to Verify)
+   - Accuracy rate percentage
+   - Severity counts (Errors, Warnings, Suggestions)
+3. **Corrections section** with each item containing:
+   - Standard fields: numbered description, Location, Severity, Context (before), Suggested fix, Rationale
+   - Fact-check specific fields: **Category** (Statistic, Citation, Study Finding, etc.), **Issue** (the discrepancy), **Source** (original citation), **Confidence** (High, Medium, Low)
+4. **Verified Claims table** - claims that passed verification
+5. **Unable to Verify table** - claims that could not be checked
 
 ---
 
@@ -539,6 +478,9 @@ git worktree list   # Check existing worktrees
 
 See [CHANGELOG-fact-check.md](./CHANGELOG-fact-check.md) for full version history.
 
+### 2.4.0 (2025-01-20)
+- Replaced inline format specification with reference to correction-report-schema.md
+
 ### 2.3.0 (2025-01-20)
 - Extracted configuration examples to central CONFIGURATION.md
 - Added reference to CONFIGURATION.md in Related section
@@ -563,5 +505,6 @@ See [CHANGELOG-fact-check.md](./CHANGELOG-fact-check.md) for full version histor
 ## Related
 
 - `/proof` - Formatting and style checks (different purpose)
+- [Correction Report Schema](../templates/correction-report-schema.md) - Standard format for corrections
 - [CONFIGURATION.md](../CONFIGURATION.md) - All CLAUDE.md configuration options
 - [correction-workflow](../guides/correction-workflow.md) - Shared apply logic
