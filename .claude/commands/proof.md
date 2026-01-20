@@ -1,6 +1,6 @@
 # Document Proofreading Command
 
-**Version:** 3.2.0
+**Version:** 3.3.0
 **Last Updated:** 2025-01-20
 
 Proofread a document, generate corrections, and optionally apply them via git worktree.
@@ -120,66 +120,18 @@ grep -n "\?\?" "$FILE"
 
 ### Step 3: Generate Corrections Report
 
-Format corrections for the [correction-workflow](../guides/correction-workflow.md):
+Format corrections following the [Correction Report Schema](../templates/correction-report-schema.md). The report should include:
 
-```markdown
-## Proofreading Report: [Filename]
-
-**Generated:** [timestamp]
-**Target:** [file path]
-**Editable:** Yes/No
-
-### Summary
-
-| Category | Count |
-|----------|-------|
-| Errors | X |
-| Warnings | X |
-| Suggestions | X |
-
----
-
-### Corrections
-
-#### [1] Typo: "teh" → "the"
-
-- **Location:** `path/to/file.md:42`
-- **Severity:** Error
-- **Context (before):**
-  ```
-  This is teh example
-  text that needs fixing.
-  ```
-- **Suggested fix:**
-  ```
-  This is the example
-  text that needs fixing.
-  ```
-- **Reason:** Spelling error
-
-#### [2] Missing comma before "and"
-
-- **Location:** `path/to/file.md:78`
-- **Severity:** Warning
-- **Context (before):**
-  ```
-  apples, oranges and bananas
-  ```
-- **Suggested fix:**
-  ```
-  apples, oranges, and bananas
-  ```
-- **Reason:** Oxford comma for consistency
-
----
-
-### Items Not Auto-Fixable
-
-| Line | Issue | Reason |
-|------|-------|--------|
-| 156 | Unclear reference | Requires author decision |
-| 203 | Missing citation | Source unknown |
-```
+1. **Header** with document name, timestamp, target file path, and editability
+2. **Summary table** with counts by severity (Errors, Warnings, Suggestions)
+3. **Corrections section** with each item containing:
+   - Numbered description (e.g., `[1] Typo: "teh" should be "the"`)
+   - Location (`path/to/file.md:line`)
+   - Severity (Error, Warning, or Suggestion)
+   - Context (before) with 2-3 surrounding lines
+   - Suggested fix with same context
+   - Rationale for the change
+4. **Items Not Auto-Fixable** table for issues requiring author decision
 
 **Important:** Include 2-3 lines of context in "Context (before)" to ensure unique matching.
 
@@ -264,12 +216,16 @@ git worktree list   # Check existing worktrees
 ## Related
 
 - `/fact-check` - Verify empirical claims (different purpose)
+- [Correction Report Schema](../templates/correction-report-schema.md) - Standard format for corrections
 - [correction-workflow](../guides/correction-workflow.md) - Shared apply logic
 - [lint-and-hooks](../guides/lint-and-hooks.md) - Pre-commit hook handling
 
 ---
 
 ## Version History
+
+### 3.3.0 (2025-01-20)
+- Replaced inline format specification with reference to correction-report-schema.md
 
 ### 3.2.0 (2025-01-20)
 - Added Troubleshooting section

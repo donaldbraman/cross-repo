@@ -1,7 +1,7 @@
 # Correction Workflow
 
-**Version:** 1.0.0
-**Last Updated:** 2025-01-19
+**Version:** 1.1.0
+**Last Updated:** 2025-01-20
 **Used by:** /proof, /fact-check
 
 Shared workflow for applying corrections from proof and fact-check reports using git worktrees as the safety mechanism.
@@ -54,27 +54,11 @@ For each correction in the report, apply using the Edit tool.
 
 ### Correction Report Format
 
-Commands must output corrections in this format:
+Commands must output corrections following the [Correction Report Schema](../templates/correction-report-schema.md). The schema defines:
 
-```markdown
-### Corrections
-
-#### [1] Short description
-
-- **Location:** `path/to/file.md:42`
-- **Severity:** Error | Warning | Suggestion
-- **Context (before):**
-  ```
-  The error rate was 39% higher than
-  the control group.
-  ```
-- **Suggested fix:**
-  ```
-  The error rate was 36% higher than
-  the control group.
-  ```
-- **Reason:** Source says 36%, not 39%
-```
+- **Required fields:** Location, Severity, Context (before), Suggested fix, Rationale
+- **Optional fields:** Category, Source, Confidence (for fact-checking)
+- **Severity levels:** Error, Warning, Suggestion
 
 ### Apply Logic
 
@@ -263,6 +247,17 @@ If `--report-only` was passed:
 
 ## Related
 
+- [Correction Report Schema](../templates/correction-report-schema.md) - Standard format for corrections
 - [Autonomous Cycle](autonomous-cycle.md) - Full dev cycle with worktrees
 - `/proof` - Generates proofreading corrections
 - `/fact-check` - Generates fact-checking corrections
+
+---
+
+## Version History
+
+### 1.1.0 (2025-01-20)
+- Replaced inline format specification with reference to correction-report-schema.md
+
+### 1.0.0 (2025-01-19)
+- Initial release
