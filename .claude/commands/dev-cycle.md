@@ -1,7 +1,7 @@
 # Autonomous Development Cycle Command
 
-**Version:** 1.0.0
-**Last Updated:** 2025-01-19
+**Version:** 1.0.1
+**Last Updated:** 2025-01-20
 
 Execute a complete autonomous development cycle using worktrees. Use `$ARGUMENTS` to specify the task description or issue number.
 
@@ -108,7 +108,7 @@ You are executing an autonomous development cycle. Complete all 6 steps without 
 
 ### Step 4: Lint
 
-See [lint-and-hooks](../guides/lint-and-hooks.md) for detailed guidance.
+**Reference:** [lint-and-hooks](../guides/lint-and-hooks.md) for complete guidance on pre-commit hooks.
 
 1. **Attempt commit:**
    ```bash
@@ -116,16 +116,7 @@ See [lint-and-hooks](../guides/lint-and-hooks.md) for detailed guidance.
    git commit -m "<type>: <description>"
    ```
 
-2. **If pre-commit hooks fail:**
-   - Read the error output
-   - Fix the code (NEVER use `--no-verify`)
-   - Stage fixes and retry commit
-
-3. **Common fixes:**
-   - D103 (missing docstring): Add docstring
-   - E501 (line too long): Break into multiple lines
-   - I001 (import order): Run `ruff check --fix .`
-   - Type errors: Add proper type annotations
+2. **If hooks fail:** Read errors, fix code, retry. Never use `--no-verify`.
 
 **Do not proceed until commit succeeds.**
 
@@ -223,11 +214,7 @@ git worktree add ../{repo}-worktrees/issue-{N} -b feat/{N}-description
 ```
 
 ### Pre-commit hook fails repeatedly
-Read error carefully. Common issues:
-- Missing docstrings → Add them
-- Line too long → Break lines
-- Import order → `ruff check --fix .`
-- Type errors → Fix types
+See [lint-and-hooks](../guides/lint-and-hooks.md) for common fixes and troubleshooting.
 
 ### Merge fails
 ```bash
@@ -262,6 +249,10 @@ Before reporting completion, verify:
 ---
 
 ## Version History
+
+### 1.0.1 (2025-01-20)
+- Consolidated pre-commit hook guidance to reference lint-and-hooks.md
+- Reduced duplication in Step 4 and Troubleshooting sections
 
 ### 1.0.0 (2025-01-19)
 - Initial release
