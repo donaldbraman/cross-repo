@@ -123,10 +123,9 @@ Work entirely within the worktree directory:
 
 ### Step 4: Lint
 
-Before committing, ensure all hooks pass:
+Before committing, ensure all hooks pass. See [lint-and-hooks.md](lint-and-hooks.md) for guidance.
 - Run `git add . && git commit`
-- If hooks fail, fix the code (never `--no-verify`)
-- See [lint-and-hooks.md](lint-and-hooks.md) for common fixes
+- If hooks fail, fix the code and retry
 
 ### Step 5: Commit, Push & Merge
 

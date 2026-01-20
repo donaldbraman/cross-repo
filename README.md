@@ -88,8 +88,8 @@ Located in `.claude/commands/`:
 | Command | Purpose | Version |
 |---------|---------|---------|
 | **[dev-cycle](.claude/commands/dev-cycle.md)** | Execute full autonomous development cycle with worktrees | 1.0.0 |
-| **[fact-check](.claude/commands/fact-check.md)** | Verify empirical claims and apply corrections | 2.0.0 |
-| **[proof](.claude/commands/proof.md)** | Proofread documents and apply corrections | 3.0.0 |
+| **[fact-check](.claude/commands/fact-check.md)** | Verify empirical claims and apply corrections | 2.1.0 |
+| **[proof](.claude/commands/proof.md)** | Proofread documents and apply corrections | 3.1.0 |
 | **[push](.claude/commands/push.md)** | Stage, commit, and push all changes | 1.0.0 |
 
 See [Commands README](.claude/commands/README.md) for usage.
