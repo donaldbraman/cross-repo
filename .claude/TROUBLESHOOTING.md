@@ -24,6 +24,7 @@ See also: [autonomous-cycle.md](guides/autonomous-cycle.md), [git-workflow.md](g
 **Cause:** Another worktree already has this branch checked out.
 
 **Solution:**
+
 ```bash
 # Find which worktree has the branch
 git worktree list
@@ -37,6 +38,7 @@ git worktree add ../{repo}-worktrees/{name} -b feat/{new-name}
 **Cause:** Previous worktree was not properly cleaned up.
 
 **Solution:**
+
 ```bash
 rm -rf ../{repo}-worktrees/{name}
 git worktree prune
@@ -48,6 +50,7 @@ git worktree add ../{repo}-worktrees/{name} -b feat/{name}
 **Cause:** Checked out a commit hash or tag instead of a branch.
 
 **Solution:**
+
 ```bash
 git checkout <branch-name>
 ```
@@ -57,6 +60,7 @@ git checkout <branch-name>
 **Cause:** Made changes directly on main branch instead of feature branch.
 
 **Solution:**
+
 ```bash
 # Create feature branch with your changes
 git branch feature/xxx
@@ -73,6 +77,7 @@ git checkout feature/xxx
 **Cause:** Reset, rebase, or branch deletion without preserving commits.
 
 **Solution:**
+
 ```bash
 # View recent actions (commits are rarely truly lost)
 git reflog
@@ -87,6 +92,7 @@ git cherry-pick <hash>
 
 **Solution:**
 This shouldn't happen with worktrees. Always verify location:
+
 ```bash
 pwd
 git branch --show-current
@@ -100,6 +106,7 @@ If you see branch switches happening, you're in the wrong directory.
 
 **Solution:**
 This is expected behavior. Create a worktree for your changes:
+
 ```bash
 git worktree add ../{repo}-worktrees/my-feature -b feat/my-feature
 cd ../{repo}-worktrees/my-feature
@@ -121,6 +128,7 @@ See also: [lint-and-hooks.md](guides/lint-and-hooks.md)
 **Cause:** Pre-commit not installed or hooks not set up.
 
 **Solution:**
+
 ```bash
 # Check if hook exists
 ls .git/hooks/pre-commit
@@ -137,6 +145,7 @@ pre-commit run --all-files
 **Cause:** Function or class lacks a docstring.
 
 **Solution:**
+
 ```python
 def search_chunks(query: str, limit: int):
     """Search chunks and return top results."""
@@ -149,6 +158,7 @@ def search_chunks(query: str, limit: int):
 **Cause:** Line exceeds maximum length (usually 88 or 120 characters).
 
 **Solution:**
+
 ```python
 # Break into multiple lines
 result = calculate_score(
@@ -164,6 +174,7 @@ result = calculate_score(
 **Cause:** Imports not sorted according to style guide.
 
 **Solution:**
+
 ```bash
 # Auto-fix with ruff
 ruff check --fix .
@@ -174,6 +185,7 @@ ruff check --fix .
 **Cause:** Missing or incorrect type annotations.
 
 **Solution:**
+
 ```python
 def get_chunks(ids: list[int]) -> list[Chunk]:
     return db.fetch(ids)
@@ -184,6 +196,7 @@ def get_chunks(ids: list[int]) -> list[Chunk]:
 **Cause:** Hook auto-formatted files but commit was rejected.
 
 **Solution:**
+
 ```bash
 # If you're the author and haven't pushed yet
 git add -A
@@ -200,6 +213,7 @@ git commit -m "style: Apply auto-fixes"
 
 **Solution:**
 Read the error output carefully. Common patterns:
+
 - Missing docstrings: Add them to all public functions
 - Line too long: Break lines or refactor
 - Import order: Run `ruff check --fix .`
@@ -216,6 +230,7 @@ See also: [pr-guidelines.md](guides/pr-guidelines.md)
 **Cause:** Authentication issue or wrong branch state.
 
 **Solution:**
+
 ```bash
 # Check authentication
 gh auth status
@@ -229,6 +244,7 @@ git branch --show-current
 **Cause:** CI checks failing or merge conflicts.
 
 **Solution:**
+
 ```bash
 # Check CI status
 gh pr checks <number>
@@ -248,6 +264,7 @@ git push --force-with-lease
 **Cause:** Various issues (permissions, conflicts, failing checks).
 
 **Solution:**
+
 ```bash
 # Diagnose the problem
 gh pr checks  # Check what's failing
@@ -265,6 +282,7 @@ See also: [agent-messaging.md](guides/agent-messaging.md)
 **Cause:** Labels don't exist or authentication issue.
 
 **Solution:**
+
 ```bash
 # Check if agent-message label exists
 gh label list --repo your-repo | grep agent-message
@@ -281,6 +299,7 @@ gh auth status
 **Cause:** Missing labels in target repo or insufficient permissions.
 
 **Solution:**
+
 ```bash
 # Check if labels exist in target repo
 gh label list --repo target-repo | grep agent-message

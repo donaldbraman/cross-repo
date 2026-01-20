@@ -12,9 +12,11 @@ Autonomous test execution without polluting main agent context. Runs test suites
 ## Input Contract
 
 **Required Parameters:**
+
 - `test_suite`: Which test suite to run (unit|integration|api|e2e|performance|smoke|all)
 
 **Optional Parameters:**
+
 - `verbose`: Include passing tests in report (default: false)
 - `timeout_override`: Custom timeout in seconds
 - `test_path`: Custom path to tests (default: tests/)
@@ -23,6 +25,7 @@ Autonomous test execution without polluting main agent context. Runs test suites
 ## Output Contract
 
 **Success (all tests pass):**
+
 ```
 All tests passed
 Suite: [suite name]
@@ -31,6 +34,7 @@ Duration: Xs
 ```
 
 **Failures:**
+
 ```
 TEST FAILURE
 Suite: [suite name]
@@ -41,6 +45,7 @@ Context: <relevant params/state>
 ```
 
 **Warnings:**
+
 ```
 WARNING
 Type: [deprecation|connection|timeout|performance]
@@ -88,21 +93,25 @@ uv run pytest {test_path} -v --tb=short
 ```
 
 Node.js (jest/vitest):
+
 ```bash
 npm test -- --testPathPattern={test_path}
 ```
 
 Rust:
+
 ```bash
 cargo test
 ```
 
 Go:
+
 ```bash
 go test ./...
 ```
 
 **Suite Mappings:**
+
 - `unit` -> tests/unit/ or tests that don't require services
 - `integration` -> tests/integration/ or tests marked integration
 - `api` -> tests/api/ or API-specific tests
@@ -112,6 +121,7 @@ go test ./...
 - `all` -> all tests
 
 **Timeouts:**
+
 - Unit: 60s
 - Integration: 180s
 - E2E: 300s
@@ -121,6 +131,7 @@ go test ./...
 **Service Health Checks (if needed):**
 
 Before running integration tests, check service dependencies:
+
 ```bash
 # Generic health endpoint pattern
 curl -s http://localhost:PORT/health || echo "Service at PORT not available"
@@ -129,10 +140,12 @@ curl -s http://localhost:PORT/health || echo "Service at PORT not available"
 **Your Final Report:**
 
 Provide actionable summary:
+
 - What failed (if anything)
 - What warnings occurred (if any)
 - Service status (if applicable)
 - Recommended next steps
+
 ```
 
 ## Version History
@@ -168,26 +181,35 @@ Provide actionable summary:
 
 ### Run Unit Tests
 ```
+
 Task tool with:
+
 - description: "Run unit tests"
 - subagent_type: "general-purpose"
 - prompt: <contents with test_suite=unit>
+
 ```
 
 ### Run Integration Tests with Custom Timeout
 ```
+
 Task tool with:
+
 - description: "Run integration tests"
 - subagent_type: "general-purpose"
 - prompt: <contents with test_suite=integration, timeout_override=300>
+
 ```
 
 ### Run All Tests Verbosely
 ```
+
 Task tool with:
+
 - description: "Run all tests verbose"
 - subagent_type: "general-purpose"
 - prompt: <contents with test_suite=all, verbose=true>
+
 ```
 
 ## Validation Checklist
@@ -198,10 +220,13 @@ Use this checklist to verify the testing agent works correctly before relying on
 
 **Minimal verification test:**
 ```
+
 Task tool with:
+
 - description: "Verify testing agent"
 - subagent_type: "general-purpose"
 - prompt: "Run smoke tests and report results using test_suite=smoke"
+
 ```
 
 **What to check:**

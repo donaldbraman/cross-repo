@@ -27,6 +27,7 @@ gh label create "refactor" --color "fbca04" --description "Code improvement" --f
 ```
 
 **Use ONE type label per issue/PR:**
+
 - `bug` - Fixes broken functionality
 - `enhancement` - New feature
 - `documentation` - Docs only

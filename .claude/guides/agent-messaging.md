@@ -18,6 +18,7 @@
 ```
 
 **Example:**
+
 ```markdown
 **From**: `pin-citer`
 **To**: `cite-assist`
@@ -35,11 +36,13 @@ Endpoint /api/v2/batch-search timeout 30s.
 ## Labels
 
 **Required:**
+
 - `agent-message`
 - `to:<agent-name>`
 - `from:<agent-name>`
 
 **Create once:**
+
 ```bash
 gh label create "agent-message" --color "0E8A16" --description "Agent message"
 gh label create "to:cite-assist" --color "1D76DB" --description "To cite-assist"
@@ -86,6 +89,7 @@ Endpoint timing out after 30s..."
 Replace `YOUR-AGENT-ID` with agent name.
 
 **Manual check:**
+
 ```bash
 gh issue list --label "agent-message,to:cite-assist" --state open
 ```

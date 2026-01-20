@@ -79,6 +79,7 @@ All agents follow this standard structure:
 ## Versioning
 
 Agents use semantic versioning:
+
 - **Patch (X.Y.Z):** Bug fixes, typo corrections
 - **Minor (X.Y.0):** New features, backwards-compatible changes
 - **Major (X.0.0):** Breaking changes to input/output contracts

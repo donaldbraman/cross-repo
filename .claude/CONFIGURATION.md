@@ -218,6 +218,7 @@ When no configuration is found in CLAUDE.md, commands use these defaults:
 ## Version History
 
 ### 1.0.0 (2025-01-20)
+
 - Initial release
 - Documented Fact-Check Configuration options
 - Documented Style Guide Configuration options

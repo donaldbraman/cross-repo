@@ -36,6 +36,7 @@ When you diagnose rate limit issues:
 ### Step 1: Identify the API
 
 Determine which API is rate limited:
+
 - Check error messages for API identifiers
 - Review recent API calls in logs
 - Check which services are active
@@ -43,6 +44,7 @@ Determine which API is rate limited:
 ### Step 2: Check Rate Limit Headers
 
 Most APIs return rate limit info in response headers:
+
 ```
 X-RateLimit-Limit: 1000
 X-RateLimit-Remaining: 0
@@ -53,15 +55,18 @@ Retry-After: 60
 ### Step 3: Identify the Pattern
 
 **Burst Pattern:**
+
 - Multiple 429 errors in quick succession
 - Happens at operation start
 - Cause: Too many requests too quickly
 
 **Sustained Pattern:**
+
 - Rate limits appear after running for a while
 - Cause: Hitting per-minute or per-hour limits
 
 **Concurrent Pattern:**
+
 - Rate limits when multiple processes run
 - Cause: Shared quota exhaustion
 
@@ -79,6 +84,7 @@ ps aux | grep "your_script" | grep -v grep
 ### Gemini API (Google AI)
 
 **Tier 2 (Paid) Limits:**
+
 | Model | RPM | TPM | RPD |
 |-------|-----|-----|-----|
 | gemini-2.0-flash | 4000 | 4M | Unlimited |
@@ -86,38 +92,46 @@ ps aux | grep "your_script" | grep -v grep
 | gemini-embedding-001 | 1500 | 1M | Unlimited |
 
 **Batch API Limits:**
+
 - Max concurrent batch jobs: 50
 - Max texts per batch: 100
 - Rate limit on submissions: ~1000/min
 
 **Common Errors:**
+
 - `429 RESOURCE_EXHAUSTED` - Hit RPM or TPM limit
 - `Quota exceeded` - Daily limit (rare on Tier 2)
 
 **Check Usage:**
-- https://ai.dev/usage?tab=rate-limit
-- https://console.cloud.google.com/apis/api/generativelanguage.googleapis.com/quotas
+
+- <https://ai.dev/usage?tab=rate-limit>
+- <https://console.cloud.google.com/apis/api/generativelanguage.googleapis.com/quotas>
 
 ### OpenAI API
 
 **Tier Limits (vary by tier):**
+
 - RPM: 500-10,000 depending on tier
 - TPM: 40K-2M depending on tier
 
 **Common Errors:**
+
 - `429 Rate limit reached`
 - `insufficient_quota`
 
 **Check Usage:**
-- https://platform.openai.com/usage
+
+- <https://platform.openai.com/usage>
 
 ### GitHub API
 
 **Authenticated Limits:**
+
 - 5,000 requests per hour
 - Search API: 30 requests per minute
 
 **Check Rate Limit:**
+
 ```bash
 gh api rate_limit
 ```
@@ -125,6 +139,7 @@ gh api rate_limit
 ### Google Docs API
 
 **Default Limits:**
+
 - Read: 300 requests per minute per user
 - Write: 60 requests per minute per user
 
@@ -135,11 +150,13 @@ gh api rate_limit
 ### Pattern 1: Burst Submission Exhaustion
 
 **Signature:**
+
 - Multiple 429 errors in quick succession
 - Errors on batch job submissions
 - Happens at start
 
 **Remediation:**
+
 ```python
 # Add delay between submissions
 await asyncio.sleep(0.2)
@@ -152,11 +169,13 @@ if "429" in error_str:
 ### Pattern 2: Concurrent Process Exhaustion
 
 **Signature:**
+
 - Rate limits appear while running
 - Multiple processes detected
 - Shared quota exhausted
 
 **Remediation:**
+
 ```bash
 # Kill duplicate runs
 pkill -f "your_script"
@@ -166,11 +185,13 @@ pkill -f "your_script"
 ### Pattern 3: Token Limit Exhaustion
 
 **Signature:**
+
 - 429 despite low request count
 - Large payloads being sent
 - TPM (tokens per minute) error messages
 
 **Remediation:**
+
 - Reduce batch sizes
 - Chunk large documents
 - Add delays between large requests

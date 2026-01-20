@@ -46,6 +46,7 @@ Standard Dev Cycle: Analyze & Research → GitHub Issue & Worktree → Dev & Tes
 ## Project-Specific Instructions
 
 Each repository has project-specific instructions:
+
 1. Check for `docs/CLAUDE.md` in current repo
 2. Check for `docs/guides/` directory
 3. Follow project-specific workflow details

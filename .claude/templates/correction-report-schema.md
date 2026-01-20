@@ -46,11 +46,15 @@ Each correction follows this format:
 - **Severity:** Error | Warning | Suggestion
 - **Context (before):**
   ```
+
   [2-3 lines of surrounding text including the issue]
+
   ```
 - **Suggested fix:**
   ```
+
   [Same context with the correction applied]
+
   ```
 - **Rationale:** [Why this change is needed]
 ```
@@ -98,13 +102,17 @@ Commands may add additional fields as needed:
 - **Severity:** Error
 - **Context (before):**
   ```
+
   This is teh example
   text that needs fixing.
+
   ```
 - **Suggested fix:**
   ```
+
   This is the example
   text that needs fixing.
+
   ```
 - **Rationale:** Spelling error
 ```
@@ -121,13 +129,17 @@ Commands may add additional fields as needed:
 - **Category:** Statistic
 - **Context (before):**
   ```
+
   The error rate was 39% higher than
   the control group.
+
   ```
 - **Suggested fix:**
   ```
+
   The error rate was 36% higher than
   the control group.
+
   ```
 - **Rationale:** Source data shows 36%, not 39%
 - **Source:** Smith et al. (2023), Table 2
@@ -167,5 +179,6 @@ See [correction-workflow](../guides/correction-workflow.md) for the complete app
 ## Version History
 
 ### 1.0.0 (2025-01-20)
+
 - Initial release
 - Consolidated schema from proof.md, fact-check.md, and correction-workflow.md

@@ -76,6 +76,7 @@ Commands receive user input via `$ARGUMENTS`. For example:
 ## Versioning
 
 Commands use semantic versioning:
+
 - **Patch (X.Y.Z):** Bug fixes, clarifications
 - **Minor (X.Y.0):** New options, expanded functionality
 - **Major (X.0.0):** Changed invocation syntax, breaking changes

@@ -55,6 +55,7 @@ Use the Explore agent (Task tool with subagent_type=Explore) to scan the codebas
 | **Test Coverage Gaps** | Untested critical paths, missing edge cases |
 
 **Analysis approach:**
+
 1. Read directory structure to understand project layout
 2. Identify entry points and core modules
 3. Examine each module for the categories above
@@ -73,6 +74,7 @@ Rank each opportunity using three criteria:
 | **Effort** | Multi-file, architectural | Single file, moderate | Few lines, straightforward |
 
 **Priority formula:**
+
 - **Top Priority:** High impact + Low risk + Low effort
 - **High Priority:** High impact + Medium risk OR Medium impact + Low risk
 - **Medium Priority:** Medium impact + Medium risk/effort
@@ -119,12 +121,14 @@ For each refactoring opportunity, produce:
    - For each refactoring in priority order:
 
    **Without `--auto-approve`:**
+
    ```
    Ready to execute refactoring [N]: [Title]
    Location: [file:line]
 
    Proceed? [Y/n/skip all/stop]
    ```
+
    Use AskUserQuestion tool with options:
    - Yes, execute this refactoring
    - No, skip this one
@@ -137,6 +141,7 @@ For each refactoring opportunity, produce:
 3. **Execute each approved refactoring:**
    - Spawn a Task tool subagent (general-purpose type)
    - The subagent should execute `/dev-cycle` with a specific task description:
+
      ```
      Task: [Category] refactoring - [Short description]
 
@@ -150,6 +155,7 @@ For each refactoring opportunity, produce:
      - Tests pass
      - No functionality changes (unless fixing bugs)
      ```
+
    - Wait for subagent completion
    - Report result (success/failure) before moving to next item
 
@@ -176,14 +182,17 @@ For each refactoring opportunity, produce:
 ## Troubleshooting
 
 ### Analysis finds too many issues
+
 Use `--path` to narrow scope or `--max` to limit execution.
 
 ### Subagent fails to complete
+
 - Check the specific error in subagent output
 - May need manual intervention for complex refactorings
 - Consider breaking into smaller changes
 
 ### False positives in analysis
+
 Skip those items during execution. Future versions may add exclusion patterns.
 
 ---
@@ -191,6 +200,7 @@ Skip those items during execution. Future versions may add exclusion patterns.
 ## Completion Checklist
 
 Before reporting completion, verify:
+
 - [ ] Arguments parsed correctly
 - [ ] Analysis covered intended scope
 - [ ] Report is clear and actionable
@@ -210,6 +220,7 @@ Before reporting completion, verify:
 ## Version History
 
 ### 1.0.0 (2025-01-20)
+
 - Initial release
 - Analysis for 7 refactoring categories
 - Priority-based ranking

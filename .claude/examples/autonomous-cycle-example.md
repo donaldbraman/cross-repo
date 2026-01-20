@@ -72,6 +72,7 @@ EOF
 ```
 
 **Output:**
+
 ```
 https://github.com/user/email-validator/issues/42
 ```
@@ -201,8 +202,8 @@ tests/test_email_utils.py::TestIsValidEmail::test_invalid_emails[] PASSED
 ### First Commit Attempt
 
 ```bash
-$ git add .
-$ git commit -m "feat: Add email validation utility function"
+git add .
+git commit -m "feat: Add email validation utility function"
 ```
 
 **Output (hook failure):**
@@ -301,10 +302,12 @@ uv run pytest tests/test_email_utils.py -v
 ```
 
 Test coverage includes:
+
 - Valid email formats (standard, with dots, with tags, subdomains)
 - Invalid email formats (missing @, missing domain, empty string)
 
 ## Breaking Changes
+
 None
 
 Closes #42
@@ -313,11 +316,14 @@ Closes #42
 Generated with [Claude Code](https://claude.ai/code)
 EOF
 )"
+
 ```
 
 **Output:**
 ```
-https://github.com/user/email-validator/pull/43
+
+<https://github.com/user/email-validator/pull/43>
+
 ```
 
 ### Merge PR
@@ -335,13 +341,13 @@ Deleted branch 'feat/42-email-validation' on GitHub.
 ### Return to Main Repo
 
 ```bash
-$ cd ~/Documents/GitHub/email-validator
+cd ~/Documents/GitHub/email-validator
 ```
 
 ### Remove Worktree
 
 ```bash
-$ git worktree remove ../email-validator-worktrees/issue-42
+git worktree remove ../email-validator-worktrees/issue-42
 ```
 
 ### Update Main

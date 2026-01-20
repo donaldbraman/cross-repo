@@ -76,20 +76,24 @@ Projects can customize fact-checking by adding configuration to their CLAUDE.md.
 ## Troubleshooting
 
 ### Source not found
+
 - Try different search terms or author name variations
 - Check if URL is behind paywall or requires login
 - Use `--report-only` to flag for manual verification
 
 ### Parallel agents timing out
+
 - Use `--sequential` flag to disable parallelization
 - Break document into smaller sections with `--section`
 
 ### Context not found when applying correction
+
 - Document may have changed since report was generated
 - Regenerate report with `/fact-check --report-only`
 - Ensure context includes enough lines for unique matching
 
 ### Worktree creation fails
+
 ```bash
 git worktree prune  # Clean up stale worktrees
 git worktree list   # Check existing worktrees
@@ -100,27 +104,33 @@ git worktree list   # Check existing worktrees
 ## Version History
 
 ### 3.0.0 (2025-01-20)
+
 - Split into modular files for maintainability
 - Created fact-check-methodology.md with detailed steps
 - Created fact-check-reference.md with claim types and red flags
 - Reduced main file from ~500 to ~150 lines
 
 ### 2.4.0 (2025-01-20)
+
 - Replaced inline format specification with reference to correction-report-schema.md
 
 ### 2.3.0 (2025-01-20)
+
 - Extracted configuration examples to central CONFIGURATION.md
 - Added reference to CONFIGURATION.md in Related section
 
 ### 2.2.0 (2025-01-20)
+
 - Added Troubleshooting section
 
 ### 2.1.0 (2025-01-20)
+
 - Standardized terminology: "Phase" -> "Step"
 - Simplified correction workflow reference (removed inline duplication)
 - Renamed sub-steps in Step 5 to "Part A-E" to avoid confusion
 
 ### 2.0.0 (2025-01-19)
+
 - Added worktree-based correction workflow
 - Auto-applies corrections with git as undo mechanism
 - Added --report-only flag
@@ -128,6 +138,7 @@ git worktree list   # Check existing worktrees
 - Added Step 8 for results reporting
 
 ### 1.0.0 (2025-01-19)
+
 - Initial cross-repo release
 - Generalized from criminal-law project-specific version
 - Made verification tools configurable via CLAUDE.md

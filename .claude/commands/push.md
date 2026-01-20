@@ -28,6 +28,7 @@ If there are no changes (staged or unstaged), inform the user and stop.
 ### Step 2: Review Changes
 
 Briefly summarize the key changes:
+
 - Modified files
 - New untracked files
 - Deleted files
@@ -41,6 +42,7 @@ git add .
 This stages all changes and respects `.gitignore`.
 
 **Check for files that should be gitignored but aren't:**
+
 - `.env`, credentials, API keys
 - Build artifacts (`node_modules/`, `__pycache__/`, `site_libs/`)
 - IDE files (`.idea/`, `.vscode/`)
@@ -48,6 +50,7 @@ This stages all changes and respects `.gitignore`.
 - Temp files (`*.tmp`, `temp/`)
 
 If found, add them to `.gitignore` first:
+
 ```bash
 echo "pattern" >> .gitignore
 git add .gitignore
@@ -71,6 +74,7 @@ Co-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>
 **Types:** feat, fix, docs, refactor, test, chore, style
 
 **Guidelines:**
+
 - First line: 50 chars or less, imperative mood
 - Body: bullet points for specific changes
 - Always end with Co-Authored-By
@@ -94,6 +98,7 @@ git push
 ```
 
 If rejected (remote has new commits):
+
 ```bash
 git pull --rebase && git push
 ```
@@ -123,18 +128,22 @@ Changes:
 ## Common Scenarios
 
 ### Nothing to commit
+
 ```
 Working tree clean. Nothing to push.
 ```
 
 ### Pre-commit hooks fail
+
 Fix the issues (see [lint-and-hooks](../guides/lint-and-hooks.md)), then retry:
+
 ```bash
 git add .
 git commit -m "..."
 ```
 
 ### Push rejected
+
 ```bash
 git pull --rebase
 # Resolve conflicts if any
@@ -142,6 +151,7 @@ git push
 ```
 
 ### Want to exclude a file
+
 ```bash
 git reset HEAD <file>  # Unstage specific file
 git add .
@@ -161,6 +171,7 @@ git commit -m "..."
 ## Version History
 
 ### 1.0.0 (2025-01-19)
+
 - Initial cross-repo release
 - Generalized from criminal-law and jil-seminar versions
 - Added $ARGUMENTS support for custom commit messages
