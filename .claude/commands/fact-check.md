@@ -476,8 +476,6 @@ git worktree list   # Check existing worktrees
 
 ## Version History
 
-See [CHANGELOG-fact-check.md](./CHANGELOG-fact-check.md) for full version history.
-
 ### 2.4.0 (2025-01-20)
 - Replaced inline format specification with reference to correction-report-schema.md
 
@@ -499,6 +497,11 @@ See [CHANGELOG-fact-check.md](./CHANGELOG-fact-check.md) for full version histor
 - Added --report-only flag
 - Integrated with correction-workflow.md guide
 - Added Step 8 for results reporting
+
+### 1.0.0 (2025-01-19)
+- Initial cross-repo release
+- Generalized from criminal-law project-specific version
+- Made verification tools configurable via CLAUDE.md
 
 ---
 
