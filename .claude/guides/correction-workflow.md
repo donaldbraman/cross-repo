@@ -1,7 +1,7 @@
 # Correction Workflow
 
-**Version:** 1.0.0
-**Last Updated:** 2025-01-19
+**Version:** 1.1.0
+**Last Updated:** 2025-01-20
 **Used by:** /proof, /fact-check
 
 Shared workflow for applying corrections from proof and fact-check reports using git worktrees as the safety mechanism.
@@ -28,7 +28,7 @@ This workflow is called by `/proof` and `/fact-check` after they generate correc
 
 ---
 
-## Phase 1: Create Worktree
+## Step 1: Create Worktree
 
 ```bash
 # Get repo name and target file
@@ -48,7 +48,7 @@ cd ../${REPO}-worktrees/$WORKTREE_NAME
 
 ---
 
-## Phase 2: Apply Corrections
+## Step 2: Apply Corrections
 
 For each correction in the report, apply using the Edit tool.
 
@@ -104,7 +104,7 @@ Skip a correction if:
 
 ---
 
-## Phase 3: Show Changes
+## Step 3: Show Changes
 
 After applying all corrections:
 
@@ -143,7 +143,7 @@ Present to user:
 
 ---
 
-## Phase 4: Handle User Decision
+## Step 4: Handle User Decision
 
 Wait for user response.
 
@@ -258,6 +258,18 @@ If `--report-only` was passed:
 - Present report only
 - Suggest: "Run without --report-only to apply corrections"
 ```
+
+---
+
+## Version History
+
+### 1.1.0 (2025-01-20)
+- Standardized terminology: "Phase" → "Step"
+
+### 1.0.0 (2025-01-19)
+- Initial release
+- Worktree-based correction workflow
+- Integration with /proof and /fact-check commands
 
 ---
 
