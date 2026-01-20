@@ -22,6 +22,7 @@ After `/proof` or `/fact-check` generates a corrections report, this workflow:
 ## When to Use
 
 This workflow is called by `/proof` and `/fact-check` after they generate corrections. Skip this workflow if:
+
 - `--report-only` flag was passed
 - No corrections were found
 - Target file is read-only (PDF, external URL)
@@ -67,12 +68,14 @@ For each correction:
 1. **Read the target file** to verify context exists
 2. **Find the exact text** from "Context (before)"
 3. **Apply the edit:**
+
    ```
    Edit tool:
    - file_path: [from Location]
    - old_string: [Context before]
    - new_string: [Suggested fix]
    ```
+
 4. **Log result:** Applied / Skipped (not found) / Failed
 
 ### Apply Order
@@ -82,6 +85,7 @@ Apply corrections **bottom-to-top** (highest line numbers first) to preserve lin
 ### Skip Conditions
 
 Skip a correction if:
+
 - Context text not found in file
 - Already matches suggested fix
 - Severity is "Suggestion" and user didn't request suggestions
@@ -248,9 +252,11 @@ If `--report-only` was passed:
 ## Version History
 
 ### 1.1.0 (2025-01-20)
+
 - Standardized terminology: "Phase" → "Step"
 
 ### 1.0.0 (2025-01-19)
+
 - Initial release
 - Worktree-based correction workflow
 - Integration with /proof and /fact-check commands
@@ -269,7 +275,9 @@ If `--report-only` was passed:
 ## Version History
 
 ### 1.1.0 (2025-01-20)
+
 - Replaced inline format specification with reference to correction-report-schema.md
 
 ### 1.0.0 (2025-01-19)
+
 - Initial release

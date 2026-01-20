@@ -12,6 +12,7 @@ Autonomous code review for pull requests, commits, or code changes. Identifies b
 ## Input Contract
 
 **Required Parameters:**
+
 - `target`: What to review - one of:
   - `pr:{number}` - Review a specific pull request
   - `commit:{sha}` - Review a specific commit
@@ -20,6 +21,7 @@ Autonomous code review for pull requests, commits, or code changes. Identifies b
   - `files:{glob}` - Review files matching pattern
 
 **Optional Parameters:**
+
 - `focus`: Areas to emphasize (`security|performance|style|bugs|all`) (default: all)
 - `severity_threshold`: Minimum severity to report (`critical|high|medium|low|info`) (default: low)
 - `language_hints`: Comma-separated list of languages if auto-detection fails
@@ -29,6 +31,7 @@ Autonomous code review for pull requests, commits, or code changes. Identifies b
 ## Output Contract
 
 **Format:**
+
 ```
 # Code Review Report
 
@@ -60,6 +63,7 @@ Autonomous code review for pull requests, commits, or code changes. Identifies b
 ```
 
 **Issue Format:**
+
 ```
 ### [SEVERITY] Issue Title
 **File:** path/to/file.py:line_number
@@ -71,6 +75,7 @@ Autonomous code review for pull requests, commits, or code changes. Identifies b
 ```code
 // Suggested fix
 ```
+
 ```
 
 **Exit Behavior:**
@@ -81,6 +86,7 @@ Autonomous code review for pull requests, commits, or code changes. Identifies b
 ## Prompt Template
 
 ```
+
 You are a code review agent. Your job is to review code changes and report issues with actionable recommendations.
 
 ## Configuration
@@ -92,29 +98,33 @@ You are a code review agent. Your job is to review code changes and report issue
 **Style Guide:** {style_guide or general best practices}
 **Max Issues:** {max_issues or 50}
 
-## Your Tasks:
+## Your Tasks
 
 ### 1. Gather Code to Review
 
 Based on target type:
 
 **For PR:**
+
 ```bash
 gh pr diff {number}
 gh pr view {number}  # Get description and context
 ```
 
 **For commit:**
+
 ```bash
 git show {sha}
 ```
 
 **For staged changes:**
+
 ```bash
 git diff --staged
 ```
 
 **For file(s):**
+
 ```bash
 # Read the file(s) directly
 ```
@@ -124,6 +134,7 @@ git diff --staged
 Check for these categories (prioritize based on `focus` parameter):
 
 #### Security Issues (CRITICAL/HIGH)
+
 - SQL injection vulnerabilities
 - XSS vulnerabilities
 - Command injection
@@ -137,6 +148,7 @@ Check for these categories (prioritize based on `focus` parameter):
 - Improper error handling exposing internals
 
 #### Bug Detection (CRITICAL/HIGH/MEDIUM)
+
 - Null pointer dereferences
 - Off-by-one errors
 - Race conditions
@@ -149,6 +161,7 @@ Check for these categories (prioritize based on `focus` parameter):
 - Incorrect API usage
 
 #### Performance Issues (MEDIUM/LOW)
+
 - N+1 query patterns
 - Unnecessary database calls in loops
 - Missing indexes on queried fields
@@ -160,6 +173,7 @@ Check for these categories (prioritize based on `focus` parameter):
 - Large payload transfers
 
 #### Code Style & Maintainability (LOW/INFO)
+
 - Inconsistent naming conventions
 - Missing or inadequate documentation
 - Functions that are too long (>50 lines)
@@ -172,6 +186,7 @@ Check for these categories (prioritize based on `focus` parameter):
 - Missing error messages
 
 #### Testing Concerns (MEDIUM/LOW)
+
 - Untested edge cases in changed code
 - Missing test coverage for new functions
 - Tests that don't assert meaningful things
@@ -200,6 +215,7 @@ Structure your report:
 ### 5. Issue Reporting Guidelines
 
 For each issue:
+
 - Be specific (include file:line)
 - Explain WHY it's a problem
 - Suggest HOW to fix it
@@ -209,6 +225,7 @@ For each issue:
 ### 6. False Positive Avoidance
 
 Skip reporting:
+
 - Framework-specific patterns that appear unusual but are correct
 - Intentional complexity with explanatory comments
 - Test files with intentional edge cases
@@ -218,6 +235,7 @@ Skip reporting:
 ## Language-Specific Checks
 
 **Python:**
+
 - Missing type hints (3.5+)
 - Mutable default arguments
 - Bare except clauses
@@ -225,6 +243,7 @@ Skip reporting:
 - Import organization (stdlib, third-party, local)
 
 **JavaScript/TypeScript:**
+
 - == vs === usage
 - Missing null checks
 - Callback hell patterns
@@ -233,23 +252,26 @@ Skip reporting:
 - any type overuse (TypeScript)
 
 **Go:**
+
 - Unchecked errors
 - Missing defer for cleanup
 - Context not passed through
 - Exported functions without docs
 
 **Rust:**
+
 - Unwrap without error handling
 - Unnecessary clones
 - Missing lifetime annotations
 - Unsafe blocks without justification
 
 **SQL:**
+
 - Missing WHERE clauses on UPDATE/DELETE
 - SELECT * usage
 - Missing indexes on JOINed columns
 
-## Report Format Example:
+## Report Format Example
 
 ```
 # Code Review Report
@@ -283,6 +305,7 @@ cursor.execute(query, (user_id,))
 ## High Priority
 
 ### [HIGH] Unhandled Exception in Payment Processing
+
 **File:** src/payments/processor.py:128
 **Category:** bug
 **Issue:** API call can throw ConnectionError which is not caught
@@ -299,6 +322,7 @@ cursor.execute(query, (user_id,))
 
 1. Consider adding integration tests for the new payment flow
 2. The repository pattern is well-implemented - consider extracting to a base class
+
 ```
 
 ## Your Output:
@@ -317,6 +341,7 @@ Do NOT ask for user input. Just report and exit.
 ## Version History
 
 ### 1.0.0 (2025-01-20)
+
 - Initial implementation
 - Support for PR, commit, diff, and file review
 - Security, bug, performance, and style checks
@@ -334,6 +359,7 @@ Do NOT ask for user input. Just report and exit.
 ## Usage Examples
 
 ### Review a Pull Request
+
 ```
 Task tool with:
 - description: "Review PR #42"
@@ -342,6 +368,7 @@ Task tool with:
 ```
 
 ### Security-Focused Review
+
 ```
 Task tool with:
 - description: "Security review of changes"
@@ -350,6 +377,7 @@ Task tool with:
 ```
 
 ### Review Specific Files
+
 ```
 Task tool with:
 - description: "Review authentication module"
@@ -358,6 +386,7 @@ Task tool with:
 ```
 
 ### Review a Commit
+
 ```
 Task tool with:
 - description: "Review commit abc123"
@@ -372,6 +401,7 @@ Use this checklist to verify the code review agent works correctly before relyin
 ### Initial Test Case
 
 **Minimal verification test:**
+
 ```
 Task tool with:
 - description: "Verify code review agent"
@@ -380,6 +410,7 @@ Task tool with:
 ```
 
 **What to check:**
+
 1. Agent retrieves the diff correctly
 2. Agent identifies file types and languages
 3. Agent categorizes issues by severity
@@ -388,6 +419,7 @@ Task tool with:
 ### Expected Output Format
 
 **Report should include:**
+
 - Summary section with issue counts by severity
 - Issues organized by severity level (Critical > High > Medium > Low)
 - Specific file:line references for each issue
@@ -395,6 +427,7 @@ Task tool with:
 - Actionable suggestions
 
 **Report should NOT include:**
+
 - Raw git diff output
 - Issues below severity threshold
 - Duplicate reports for same pattern
@@ -429,6 +462,7 @@ def bad_function(items=[]):  # Mutable default argument
 ```
 
 **Expected detections:**
+
 - Mutable default argument (Medium - bug)
 - SQL injection (Critical - security)
 - Hardcoded credential (Critical - security)

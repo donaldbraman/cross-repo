@@ -119,15 +119,19 @@ The agent generates a structured report following the [correction report schema]
 - **Severity:** Error
 - **Context (before):**
   ```
-  ## Methodology
 
-  ### 2.1 Partipant Selection
+## Methodology
+
+### 2.1 Partipant Selection
+
   ```
 - **Suggested fix:**
   ```
-  ## Methodology
 
-  ### 2.1 Participant Selection
+## Methodology
+
+### 2.1 Participant Selection
+
   ```
 - **Rationale:** Spelling error in section heading
 
@@ -137,15 +141,19 @@ The agent generates a structured report following the [correction report schema]
 - **Severity:** Error
 - **Context (before):**
   ```
-  ### 2.1 Participant Selection
+
+### 2.1 Participant Selection
 
   We recruited 120 participants form a univeristy pool. Participants
+
   ```
 - **Suggested fix:**
   ```
-  ### 2.1 Participant Selection
+
+### 2.1 Participant Selection
 
   We recruited 120 participants from a univeristy pool. Participants
+
   ```
 - **Rationale:** Common typo - "form" vs "from"
 
@@ -155,13 +163,17 @@ The agent generates a structured report following the [correction report schema]
 - **Severity:** Error
 - **Context (before):**
   ```
+
   We recruited 120 participants from a univeristy pool. Participants
   were between the ages of 18-65 and had no prior exposure to teh
+
   ```
 - **Suggested fix:**
   ```
+
   We recruited 120 participants from a university pool. Participants
   were between the ages of 18-65 and had no prior exposure to teh
+
   ```
 - **Rationale:** Spelling error
 
@@ -171,13 +183,17 @@ The agent generates a structured report following the [correction report schema]
 - **Severity:** Error
 - **Context (before):**
   ```
+
   were between the ages of 18-65 and had no prior exposure to teh
   experimental stimulus.
+
   ```
 - **Suggested fix:**
   ```
+
   were between the ages of 18-65 and had no prior exposure to the
   experimental stimulus.
+
   ```
 - **Rationale:** Common typo
 
@@ -187,15 +203,19 @@ The agent generates a structured report following the [correction report schema]
 - **Severity:** Error
 - **Context (before):**
   ```
-  ### 2.2 Procedure
+
+### 2.2 Procedure
 
   Each partipant completed a series of tasks:
+
   ```
 - **Suggested fix:**
   ```
-  ### 2.2 Procedure
+
+### 2.2 Procedure
 
   Each participant completed a series of tasks:
+
   ```
 - **Rationale:** Spelling error
 
@@ -205,17 +225,21 @@ The agent generates a structured report following the [correction report schema]
 - **Severity:** Error
 - **Context (before):**
   ```
+
   Each participant completed a series of tasks:
 
   1. Pre-test questionaire
   2. Exposure to stimulus (15 minutes)
+
   ```
 - **Suggested fix:**
   ```
+
   Each participant completed a series of tasks:
 
   1. Pre-test questionnaire
   2. Exposure to stimulus (15 minutes)
+
   ```
 - **Rationale:** Spelling error
 
@@ -225,15 +249,19 @@ The agent generates a structured report following the [correction report schema]
 - **Severity:** Error
 - **Context (before):**
   ```
+
   2. Exposure to stimulus (15 minutes)
   3. Post-test questionare
   4. Follow-up interview (optional)
+
   ```
 - **Suggested fix:**
   ```
+
   2. Exposure to stimulus (15 minutes)
   3. Post-test questionnaire
   4. Follow-up interview (optional)
+
   ```
 - **Rationale:** Spelling error
 
@@ -243,17 +271,21 @@ The agent generates a structured report following the [correction report schema]
 - **Severity:** Warning
 - **Context (before):**
   ```
-  ### 2.3 Analysis
+
+### 2.3 Analysis
 
   Data was analyzed using SPSS version 27.  We applied a
   mixed-effects model with participant as a random effect.
+
   ```
 - **Suggested fix:**
   ```
-  ### 2.3 Analysis
+
+### 2.3 Analysis
 
   Data was analyzed using SPSS version 27. We applied a
   mixed-effects model with participant as a random effect.
+
   ```
 - **Rationale:** Standard style uses single space after period
 
@@ -479,6 +511,7 @@ Deleted branch fix/proof-20250120-103000 (was def5678).
 ```
 
 **Report:**
+
 ```
 Changes discarded. No modifications made to main.
 ```
@@ -523,7 +556,7 @@ After a successful `/proof` cycle with "approve":
 ### Report-Only Mode
 
 ```bash
-$ /proof chapters/methodology.md --report-only
+/proof chapters/methodology.md --report-only
 ```
 
 The agent generates the report but does not create a worktree or apply corrections:
@@ -539,7 +572,7 @@ Run without --report-only to apply corrections.
 ### PDF Documents
 
 ```bash
-$ /proof paper.pdf
+/proof paper.pdf
 ```
 
 PDFs are read-only, so the workflow stops after the report:
@@ -561,7 +594,7 @@ Note: PDF files cannot be edited. Export to a source format to apply corrections
 ### Including Suggestions
 
 ```bash
-$ /proof chapters/methodology.md --include-suggestions
+/proof chapters/methodology.md --include-suggestions
 ```
 
 The agent also applies severity=Suggestion items, not just Error and Warning.
@@ -569,7 +602,7 @@ The agent also applies severity=Suggestion items, not just Error and Warning.
 ### Auto-Approve Mode
 
 ```bash
-$ /proof chapters/methodology.md --auto-approve
+/proof chapters/methodology.md --auto-approve
 ```
 
 The agent applies corrections and merges without prompting. Use with caution.

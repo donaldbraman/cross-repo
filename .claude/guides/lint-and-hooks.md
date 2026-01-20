@@ -29,6 +29,7 @@ git commit -m "message"
 ## Common Fixes
 
 **D103 (Missing docstring):**
+
 ```python
 def search_chunks(query: str, limit: int):
     """Search chunks and return top results."""
@@ -37,6 +38,7 @@ def search_chunks(query: str, limit: int):
 ```
 
 **E501 (Line too long):**
+
 ```python
 result = calculate_score(
     query_embedding,
@@ -47,11 +49,13 @@ result = calculate_score(
 ```
 
 **I001 (Import order):**
+
 ```bash
 ruff check --fix .
 ```
 
 **Type errors:**
+
 ```python
 def get_chunks(ids: list[int]) -> list[Chunk]:
     return db.fetch(ids)

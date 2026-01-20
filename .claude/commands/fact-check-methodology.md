@@ -28,17 +28,20 @@ If no configuration found, use defaults (web search only, standard categories).
 Read the document and identify all verifiable claims:
 
 **High Priority (Always Verify):**
+
 - Statistics with specific numbers (percentages, sample sizes, dollar amounts)
 - Study findings ("X found that Y", effect sizes)
 - Direct citations with author/year
 - Comparative claims ("X is higher/lower than Y")
 
 **Medium Priority (Spot Check):**
+
 - Historical facts and dates
 - Domain-specific technical claims
 - General characterizations of research
 
 **Skip:**
+
 - Opinions and arguments
 - Predictions and hypotheticals
 - Quoted material (verify separately with /verify-quotes if available)
@@ -68,6 +71,7 @@ Priority = (Central to argument) x (Specificity) x (Verifiability)
 ```
 
 For a typical document:
+
 - Verify 100% of statistics and effect sizes
 - Verify 100% of study characterizations supporting key arguments
 - Verify 80% of citations (author, year, publication)
@@ -83,6 +87,7 @@ Break compound claims into atomic facts:
 > "The evaluation found participants were 58% less likely to fail"
 
 Atomic facts:
+
 1. There was an evaluation study
 2. The metric was likelihood of failure
 3. The reduction was 58%
@@ -106,6 +111,7 @@ curl -s http://localhost:[PORT]/health
 ```
 
 **Why local first?**
+
 - Sources already vetted and in your collection
 - Extracted text available for exact verification
 - No rate limits or network latency
@@ -120,6 +126,7 @@ If not found locally and project has external search configured:
 ```
 
 **Benefits:**
+
 - Access to large paper databases
 - Can acquire new sources for future use
 
@@ -150,6 +157,7 @@ Compare claim to source. Assign verdict:
 | **CONTRADICTED** | Source says something different |
 
 Rate confidence:
+
 - **High**: Accessed original source
 - **Medium**: Found corroborating secondary source
 - **Low**: Only indirect evidence
@@ -201,6 +209,7 @@ For each section:
 ```
 
 **Example:**
+
 ```
 Document analysis:
   - Part I: Background (lines 1-150) -- 28 claims detected
@@ -225,6 +234,7 @@ Task tool parameters:
 ```
 
 Each subagent receives:
+
 1. The specific line range to check
 2. The target claim count (~10-15 claims max)
 3. Instructions to output findings in standardized correction format
@@ -249,6 +259,7 @@ Return your findings when complete.
 ### Part E: Synthesize Results
 
 After all agents complete:
+
 1. Collect all findings from subagents
 2. Deduplicate any overlapping claims
 3. Sort by line number
@@ -280,6 +291,7 @@ Format corrections following the [Correction Report Schema](../templates/correct
 ## Step 7: Apply Corrections
 
 **If `--report-only` was passed:**
+
 - Present report only
 - Suggest: "Run without --report-only to apply corrections"
 - Stop here
@@ -288,6 +300,7 @@ Format corrections following the [Correction Report Schema](../templates/correct
 Follow the [correction-workflow](../guides/correction-workflow.md) guide.
 
 **If no corrections needed:**
+
 - Report: "All claims verified! No corrections needed."
 
 ---

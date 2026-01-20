@@ -45,11 +45,13 @@ You are a professional proofreader. Review the document systematically, generate
 4. **Get document info:**
 
    **For PDF:**
+
    ```bash
    python -c "from pypdf import PdfReader; r=PdfReader('$FILE'); print(f'Pages: {len(r.pages)}')"
    ```
 
    **For Markdown/Text:**
+
    ```bash
    wc -l "$FILE"
    ```
@@ -66,6 +68,7 @@ You are a professional proofreader. Review the document systematically, generate
 #### For PDF Documents
 
 Extract and review page by page:
+
 ```bash
 uv run python scripts/pdf_page_extractor.py "$FILE" --page [N] --text
 ```
@@ -77,12 +80,14 @@ Read in chunks using the Read tool with offset and limit parameters.
 #### What to Check
 
 **Typography:**
+
 - Orphans/widows
 - Bad line/word breaks
 - Inconsistent spacing
 - Missing/incorrect punctuation
 
 **Content:**
+
 - Typos and spelling errors
 - Grammar issues
 - Broken cross-references ("Figure ??")
@@ -90,12 +95,14 @@ Read in chunks using the Read tool with offset and limit parameters.
 - Inconsistent terminology
 
 **Markdown-Specific:**
+
 - Broken links `[text]()`
 - Inconsistent heading levels
 - Unclosed code blocks
 - Malformed lists
 
 **Academic/Technical:**
+
 - Citation format consistency
 - Missing references
 - Equation formatting
@@ -140,6 +147,7 @@ Format corrections following the [Correction Report Schema](../templates/correct
 ### Step 4: Apply Corrections
 
 **If `--report-only` OR file is PDF:**
+
 - Present report only
 - Suggest: "Run without --report-only to apply corrections" (if applicable)
 - Stop here
@@ -148,6 +156,7 @@ Format corrections following the [Correction Report Schema](../templates/correct
 Follow the [correction-workflow](../guides/correction-workflow.md) guide.
 
 **If no corrections found:**
+
 - Report: "No corrections needed. Document looks good!"
 
 ---
@@ -196,17 +205,20 @@ After user decision (or for report-only):
 ## Troubleshooting
 
 ### Context not found when applying correction
+
 - The document may have changed since the report was generated
 - Try regenerating the report with `/proof --report-only`
 - Ensure context includes enough surrounding lines for unique matching
 
 ### Worktree creation fails
+
 ```bash
 git worktree prune  # Clean up stale worktrees
 git worktree list   # Check existing worktrees
 ```
 
 ### Corrections applied incorrectly
+
 - Use `git diff` in the worktree to review changes
 - Choose "reject" to discard and try again
 - Report may need more context for unique matching
@@ -226,21 +238,26 @@ git worktree list   # Check existing worktrees
 ## Version History
 
 ### 3.4.0 (2025-01-20)
+
 - Replaced inline format specification with reference to correction-report-schema.md
 
 ### 3.3.0 (2025-01-20)
+
 - Added reference to CONFIGURATION.md for style guide options
 - Added CONFIGURATION.md to Related section
 
 ### 3.2.0 (2025-01-20)
+
 - Added Troubleshooting section
 - Added Related section
 
 ### 3.1.0 (2025-01-20)
+
 - Standardized terminology: "Phase" -> "Step"
 - Simplified correction workflow reference (removed inline duplication)
 
 ### 3.0.0 (2025-01-19)
+
 - Added worktree-based correction workflow
 - Auto-applies corrections with git as undo mechanism
 - Added --report-only flag
@@ -248,11 +265,14 @@ git worktree list   # Check existing worktrees
 - Integrated with correction-workflow.md guide
 
 ### 2.1.0 (2025-01-19)
+
 - Added step to check CLAUDE.md for linked style guides
 
 ### 2.0.0 (2025-01-19)
+
 - Generalized from chirho PDF proofer
 - Added support for Markdown and plain text
 
 ### 1.0.0
+
 - Initial PDF-specific implementation

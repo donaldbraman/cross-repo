@@ -1,0 +1,45 @@
+# Markdownlint configuration
+# See https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md
+
+# Default state for all rules
+default: true
+
+# MD013/line-length - Line length (disabled for flexibility with documentation)
+MD013: false
+
+# MD024/no-duplicate-heading - Multiple headings with the same content
+# Disabled because examples show before/after content with identical headings
+MD024: false
+
+# MD025/single-title - Multiple top-level headings (disabled for embedded examples)
+MD025: false
+
+# MD029/ol-prefix - Ordered list item prefix
+# Allow both "1. 1. 1." and "1. 2. 3." styles
+MD029: false
+
+# MD033/no-inline-html - Inline HTML
+MD033:
+  allowed_elements:
+    - br
+    - sub
+    - sup
+    - kbd
+    - details
+    - summary
+    - contents
+
+# MD036/no-emphasis-as-heading - Emphasis used instead of a heading
+# Disabled for italicized metadata like "Last updated"
+MD036: false
+
+# MD040/fenced-code-language - Fenced code blocks should have a language
+# Disabled to allow plain text code blocks for flexibility
+MD040: false
+
+# MD041/first-line-heading - First line should be a top-level heading
+MD041: false
+
+# MD046/code-block-style - Code block style
+MD046:
+  style: fenced

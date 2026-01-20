@@ -37,17 +37,20 @@ main (production-ready)
 ```
 
 ### Main Branch
+
 - **Name:** `main` (not master)
 - **Protection:** Never commit directly
 - **Purpose:** Production-ready code only
 
 ### Feature Branches
+
 - **Naming:** `feature/<issue-number>-<short-description>`
 - **Example:** `feature/442-v3-api-hybrid-search`
 - **Lifespan:** Created from main, merged back, then deleted
 - **Commits:** Squashed on merge for clean history
 
 ### Branch Creation
+
 ```bash
 # Always start from main
 git checkout main
@@ -60,6 +63,7 @@ git checkout -b feature/<issue-number>-<description>
 ## Commit Conventions
 
 ### Commit Message Format
+
 ```
 <type>: <subject>
 
@@ -69,6 +73,7 @@ Co-Authored-By: Claude <noreply@anthropic.com>
 ```
 
 ### Commit Types
+
 - `feat:` New feature
 - `fix:` Bug fix
 - `docs:` Documentation only
@@ -77,6 +82,7 @@ Co-Authored-By: Claude <noreply@anthropic.com>
 - `chore:` Tooling, dependencies, maintenance
 
 ### Commit Guidelines
+
 - ✅ Present tense ("Add feature" not "Added feature")
 - ✅ Imperative mood ("Move cursor to..." not "Moves cursor to...")
 - ✅ Focus on "why" not "what" (code shows what)
@@ -86,6 +92,7 @@ Co-Authored-By: Claude <noreply@anthropic.com>
 ## Pull Request Workflow
 
 ### PR Creation
+
 ```bash
 # After all commits are made
 gh pr create --title "feat: Description" --body "..."
@@ -95,6 +102,7 @@ gh pr merge <number> --squash --delete-branch
 ```
 
 ### PR Requirements
+
 - ✅ Linked to issue
 - ✅ Descriptive title matching commit convention
 - ✅ Detailed body with:
@@ -105,6 +113,7 @@ gh pr merge <number> --squash --delete-branch
 - ✅ Pre-commit hooks passing
 
 ### Merge Strategy
+
 - **Method:** Squash merge (creates single commit on main)
 - **Timing:** Immediate (autonomous mode)
 - **Branch:** Auto-delete after merge
@@ -112,6 +121,7 @@ gh pr merge <number> --squash --delete-branch
 ## Common Operations
 
 ### Update Feature Branch
+
 ```bash
 # Rebase on main to stay current
 git checkout main
@@ -121,6 +131,7 @@ git rebase main
 ```
 
 ### Fix Merge Conflicts
+
 ```bash
 # Resolve conflicts, then
 git add <resolved-files>
@@ -128,6 +139,7 @@ git rebase --continue
 ```
 
 ### Abandon Feature Branch
+
 ```bash
 git checkout main
 git branch -D feature/xxx
@@ -158,6 +170,7 @@ git cherry-pick <hash>
 This is a **global guide** applicable to all repositories.
 
 Check `docs/guides/git-workflow.md` in current repo for:
+
 - Project-specific branch naming conventions
 - Custom merge strategies
 - Release branch workflows

@@ -22,9 +22,11 @@ You are executing an autonomous development cycle. Complete all 6 steps without 
 ### Step 1: Analyze & Research
 
 1. **If `$ARGUMENTS` is an issue number (#N):**
+
    ```bash
    gh issue view N
    ```
+
    Read the issue and understand requirements.
 
 2. **If `$ARGUMENTS` is a task description:**
@@ -42,6 +44,7 @@ You are executing an autonomous development cycle. Complete all 6 steps without 
 ### Step 2: Issue & Worktree
 
 1. **Create GitHub issue** (skip if already exists):
+
    ```bash
    gh label create "enhancement" --color "a2eeef" --description "New feature" --force 2>/dev/null || true
    gh label create "bug" --color "d73a4a" --description "Bug fix" --force 2>/dev/null || true
@@ -59,9 +62,11 @@ You are executing an autonomous development cycle. Complete all 6 steps without 
    EOF
    )"
    ```
+
    Note the issue number N.
 
 2. **Create worktree:**
+
    ```bash
    cd ~/Documents/GitHub/{repo}
    git checkout main && git pull origin main
@@ -71,6 +76,7 @@ You are executing an autonomous development cycle. Complete all 6 steps without 
    ```
 
 3. **Verify location:**
+
    ```bash
    pwd
    git branch --show-current
@@ -90,6 +96,7 @@ You are executing an autonomous development cycle. Complete all 6 steps without 
 2. **Write or update tests** (if applicable)
 
 3. **Run tests until all pass:**
+
    ```bash
    # Python
    uv run pytest tests/ -v
@@ -111,6 +118,7 @@ You are executing an autonomous development cycle. Complete all 6 steps without 
 **Reference:** [lint-and-hooks](../guides/lint-and-hooks.md) for complete guidance on pre-commit hooks.
 
 1. **Attempt commit:**
+
    ```bash
    git add .
    git commit -m "<type>: <description>"
@@ -125,11 +133,13 @@ You are executing an autonomous development cycle. Complete all 6 steps without 
 ### Step 5: Commit, Push & Merge
 
 1. **Push branch:**
+
    ```bash
    git push -u origin feat/{N}-description
    ```
 
 2. **Create PR:**
+
    ```bash
    gh label create "enhancement" --color "a2eeef" --force 2>/dev/null || true
 
@@ -153,6 +163,7 @@ You are executing an autonomous development cycle. Complete all 6 steps without 
    ```
 
 3. **Merge PR:**
+
    ```bash
    gh pr merge --squash --delete-branch
    ```
@@ -162,22 +173,26 @@ You are executing an autonomous development cycle. Complete all 6 steps without 
 ### Step 6: Close & Cleanup
 
 1. **Return to main repo:**
+
    ```bash
    cd ~/Documents/GitHub/{repo}
    ```
 
 2. **Remove worktree:**
+
    ```bash
    git worktree remove ../{repo}-worktrees/issue-{N}
    ```
 
 3. **Update main:**
+
    ```bash
    git pull origin main
    git worktree prune
    ```
 
 4. **Verify clean state:**
+
    ```bash
    git status
    git worktree list
@@ -202,11 +217,13 @@ Issue closes automatically from "Closes #N" in PR body.
 ## Troubleshooting
 
 ### "fatal: '{branch}' is already checked out"
+
 ```bash
 git worktree list  # Find which worktree has it
 ```
 
 ### Worktree directory already exists
+
 ```bash
 rm -rf ../{repo}-worktrees/issue-{N}
 git worktree prune
@@ -214,9 +231,11 @@ git worktree add ../{repo}-worktrees/issue-{N} -b feat/{N}-description
 ```
 
 ### Pre-commit hook fails repeatedly
+
 See [lint-and-hooks](../guides/lint-and-hooks.md) for common fixes and troubleshooting.
 
 ### Merge fails
+
 ```bash
 gh pr checks  # Check what's failing
 gh pr view    # View PR status
@@ -227,6 +246,7 @@ gh pr view    # View PR status
 ## Completion Checklist
 
 Before reporting completion, verify:
+
 - [ ] Issue created (or existing issue used)
 - [ ] Worktree created and used for all work
 - [ ] Solution implemented
@@ -251,10 +271,12 @@ Before reporting completion, verify:
 ## Version History
 
 ### 1.0.1 (2025-01-20)
+
 - Consolidated pre-commit hook guidance to reference lint-and-hooks.md
 - Reduced duplication in Step 4 and Troubleshooting sections
 
 ### 1.0.0 (2025-01-19)
+
 - Initial release
 - Full 6-step autonomous cycle
 - Worktree-based workflow

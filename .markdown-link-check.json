@@ -1,0 +1,31 @@
+{
+  "ignorePatterns": [
+    {
+      "pattern": "^file://",
+      "comment": "Ignore local file:// links"
+    },
+    {
+      "pattern": "^#",
+      "comment": "Ignore anchor-only links"
+    },
+    {
+      "pattern": "^mailto:",
+      "comment": "Ignore mailto links"
+    },
+    {
+      "pattern": "^https://github.com/donaldbraman/",
+      "comment": "Ignore links to donaldbraman repos (may be private or not yet created)"
+    },
+    {
+      "pattern": "^https://github.com/user/",
+      "comment": "Ignore placeholder example links"
+    }
+  ],
+  "replacementPatterns": [],
+  "httpHeaders": [],
+  "timeout": "10s",
+  "retryOn429": true,
+  "retryCount": 3,
+  "fallbackRetryDelay": "30s",
+  "aliveStatusCodes": [200, 206]
+}

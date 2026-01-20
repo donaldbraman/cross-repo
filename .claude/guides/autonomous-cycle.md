@@ -16,6 +16,7 @@
 ## Why Worktrees?
 
 **Problem with branches:** When multiple agents work in the same repo directory, they constantly switch branches, causing:
+
 - Lost uncommitted work
 - File overwrites
 - Pre-commit hook failures that reset state
@@ -103,11 +104,13 @@ git worktree prune
 ### Step 2: Issue & Worktree
 
 **Create/update GitHub issue** with detailed description:
+
 - Problem statement or feature request
 - Acceptance criteria
 - Technical approach (if known)
 
 **Create worktree** linked to issue:
+
 ```bash
 git worktree add ../{repo}-worktrees/issue-{N} -b feat/{N}-description
 cd ../{repo}-worktrees/issue-{N}
@@ -116,6 +119,7 @@ cd ../{repo}-worktrees/issue-{N}
 ### Step 3: Develop & Test
 
 Work entirely within the worktree directory:
+
 - Implement minimal changes to solve the problem
 - Write or update tests
 - Run tests until all pass
@@ -168,9 +172,11 @@ git worktree add ../{repo}-worktrees/issue-{N} feat/{N}-description
 ## Troubleshooting
 
 ### "fatal: '{branch}' is already checked out"
+
 Another worktree has this branch. Find it with `git worktree list`.
 
 ### Worktree directory already exists
+
 ```bash
 rm -rf ../{repo}-worktrees/{name}
 git worktree prune
@@ -178,10 +184,13 @@ git worktree add ../{repo}-worktrees/{name} -b feat/{name}
 ```
 
 ### Lost work after branch switch
+
 This shouldn't happen with worktrees! If you're seeing branch switches, you're in the wrong directory. Always verify with `pwd` and `git branch`.
 
 ### Pre-commit blocks commit to main
+
 This is expected! Create a worktree:
+
 ```bash
 git worktree add ../{repo}-worktrees/my-feature -b feat/my-feature
 cd ../{repo}-worktrees/my-feature
@@ -209,6 +218,7 @@ Agent C: ~/GitHub/repo-worktrees/feat-api/     ← Working on API feature
 ```
 
 Each agent:
+
 - Has its own directory
 - Has its own branch checked out
 - Cannot interfere with other agents

@@ -13,6 +13,7 @@
 **Types:** `feat`, `fix`, `refactor`, `docs`, `test`, `chore`
 
 **Rules:**
+
 - Lowercase after colon, no period
 - Imperative mood: "Add feature" not "Added feature"
 - Under 72 chars
@@ -35,6 +36,7 @@ Closes #XXX
 ```
 
 **Example:**
+
 ```markdown
 ## Summary
 - Implemented v3 API with hybrid search
@@ -48,12 +50,15 @@ curl -X POST http://localhost:8000/api/v3/search \
   -d '{"library_id": "5673253", "query": "test", "top_k": 5}'
 # Returns in 2.3s
 ```
+
 Tests: `tests/test_api_v3.py` - 127 passed
 
 ## Breaking Changes
+
 None
 
 Closes #442
+
 ```
 
 ## Create PR

@@ -12,6 +12,7 @@ Autonomous documentation maintenance agent. Generates missing documentation, upd
 ## Input Contract
 
 **Required Parameters:**
+
 - `mode`: Operation mode - one of:
   - `audit` - Check documentation coverage and staleness
   - `generate` - Create missing documentation
@@ -19,6 +20,7 @@ Autonomous documentation maintenance agent. Generates missing documentation, upd
   - `validate` - Verify docs match current implementation
 
 **Optional Parameters:**
+
 - `scope`: What to document (`all|public|api|readme|guides`) (default: public)
 - `format`: Documentation format (`markdown|jsdoc|pydoc|rustdoc|godoc`) (default: auto-detect)
 - `output_style`: Level of detail (`minimal|standard|comprehensive`) (default: standard)
@@ -30,6 +32,7 @@ Autonomous documentation maintenance agent. Generates missing documentation, upd
 ## Output Contract
 
 **Audit Mode Format:**
+
 ```
 # Documentation Audit Report
 
@@ -60,6 +63,7 @@ Autonomous documentation maintenance agent. Generates missing documentation, upd
 ```
 
 **Generate/Update Mode Format:**
+
 ```
 # Documentation Generated/Updated
 
@@ -79,6 +83,7 @@ Autonomous documentation maintenance agent. Generates missing documentation, upd
 ```
 
 **Validate Mode Format:**
+
 ```
 # Documentation Validation Report
 
@@ -99,6 +104,7 @@ Autonomous documentation maintenance agent. Generates missing documentation, upd
 ```
 
 **Exit Behavior:**
+
 - In audit/validate mode: Report only, no changes
 - In generate/update mode: Create/modify documentation files
 - Always report what was changed
@@ -170,6 +176,7 @@ You are a documentation agent. Your job is to maintain, generate, and validate p
 
    **For Functions/Methods:**
    ```
+
    [Brief description of what it does]
 
    Args/Parameters:
@@ -183,10 +190,12 @@ You are a documentation agent. Your job is to maintain, generate, and validate p
 
    Example:
        [Usage example if include_examples=true]
+
    ```
 
    **For Classes:**
    ```
+
    [Brief description of the class purpose]
 
    Attributes:
@@ -194,10 +203,12 @@ You are a documentation agent. Your job is to maintain, generate, and validate p
 
    Example:
        [Instantiation example]
+
    ```
 
    **For Modules:**
    ```
+
    [Module purpose and overview]
 
    Key Components:
@@ -206,28 +217,36 @@ You are a documentation agent. Your job is to maintain, generate, and validate p
 
    Usage:
        [Import and basic usage]
+
    ```
 
    **For README Files:**
    ```
-   # Project/Module Name
+
+# Project/Module Name
 
    [Brief description]
 
-   ## Installation
+## Installation
+
    [How to install/setup]
 
-   ## Usage
+## Usage
+
    [Basic usage examples]
 
-   ## API Reference
+## API Reference
+
    [Link to detailed docs or inline reference]
 
-   ## Contributing
+## Contributing
+
    [How to contribute]
 
-   ## License
+## License
+
    [License information]
+
    ```
 
 3. **Apply Format Standards**
@@ -342,9 +361,11 @@ A document is likely stale if:
 ## Report Example:
 
 ```
+
 # Documentation Audit Report
 
 ## Summary
+
 - Total Files Scanned: 45
 - Documented: 38 (84%)
 - Missing Docs: 12 functions, 3 classes
@@ -352,6 +373,7 @@ A document is likely stale if:
 - Broken Links: 2
 
 ## Coverage by Category
+
 - Public APIs: 92%
 - Internal Functions: 67%
 - README Files: Present
@@ -360,6 +382,7 @@ A document is likely stale if:
 ## Missing Documentation
 
 ### High Priority (Public API)
+
 | Item | File | Type |
 |------|------|------|
 | authenticate() | src/auth/login.py:45 | function |
@@ -367,6 +390,7 @@ A document is likely stale if:
 | validate_token() | src/auth/tokens.py:78 | function |
 
 ### Medium Priority (Internal)
+
 | Item | File | Type |
 |------|------|------|
 | _parse_config() | src/utils/config.py:23 | function |
@@ -388,6 +412,7 @@ A document is likely stale if:
 ## Recommendations
 
 **Priority 1 - Public API:**
+
 1. Document authenticate() function - critical user-facing API
 2. Add UserSession class documentation
 
@@ -398,6 +423,7 @@ A document is likely stale if:
 **Priority 3 - Improvement:**
 5. Add docstrings to internal utility functions
 6. Create missing guide for deployment
+
 ```
 
 ## Your Output:
@@ -414,6 +440,7 @@ Do NOT ask for user input. Just report and exit.
 ## Version History
 
 ### 1.0.0 (2025-01-20)
+
 - Initial implementation
 - Four modes: audit, generate, update, validate
 - Support for multiple documentation formats
@@ -432,6 +459,7 @@ Do NOT ask for user input. Just report and exit.
 ## Usage Examples
 
 ### Audit Documentation Coverage
+
 ```
 Task tool with:
 - description: "Audit project documentation"
@@ -440,6 +468,7 @@ Task tool with:
 ```
 
 ### Generate Missing Documentation
+
 ```
 Task tool with:
 - description: "Generate missing docs for public API"
@@ -448,6 +477,7 @@ Task tool with:
 ```
 
 ### Update Stale Documentation
+
 ```
 Task tool with:
 - description: "Update outdated documentation"
@@ -456,6 +486,7 @@ Task tool with:
 ```
 
 ### Validate Documentation Accuracy
+
 ```
 Task tool with:
 - description: "Validate docs match implementation"
@@ -464,6 +495,7 @@ Task tool with:
 ```
 
 ### Quick README Check
+
 ```
 Task tool with:
 - description: "Check README completeness"
@@ -478,6 +510,7 @@ Use this checklist to verify the documentation agent works correctly before rely
 ### Initial Test Case
 
 **Minimal verification test:**
+
 ```
 Task tool with:
 - description: "Verify documentation agent"
@@ -486,6 +519,7 @@ Task tool with:
 ```
 
 **What to check:**
+
 1. Agent identifies project type and documentation format
 2. Agent scans source files for existing documentation
 3. Agent calculates coverage percentages
@@ -494,17 +528,20 @@ Task tool with:
 ### Expected Output Format
 
 **Audit report should include:**
+
 - Summary section with coverage statistics
 - Missing documentation listed by priority
 - Stale documentation identified
 - Actionable recommendations
 
 **Generate output should include:**
+
 - List of files created/updated
 - Preview of generated content
 - Items flagged for human review
 
 **Report should NOT include:**
+
 - Raw file contents without analysis
 - User prompts or questions
 - Changes in audit/validate mode (report only)
@@ -556,6 +593,7 @@ class UndocumentedClass:
 ```
 
 **Expected detections in audit mode:**
+
 - `undocumented_function` flagged as missing docs
 - `UndocumentedClass` flagged as missing docs
 - `method_without_docs` flagged as missing docs

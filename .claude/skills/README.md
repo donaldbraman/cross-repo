@@ -73,6 +73,7 @@ skill-name/
 ## Versioning
 
 Skills use semantic versioning:
+
 - **Patch (X.Y.Z):** New examples, typo fixes
 - **Minor (X.Y.0):** New patterns, expanded knowledge
 - **Major (X.0.0):** Restructured knowledge base, changed diagnostic approach
@@ -90,6 +91,7 @@ To add a new shared skill:
 ## Project-Specific Skills
 
 Projects can have local skills that:
+
 - Extend shared skills with project-specific knowledge
 - Handle domain-specific issues not applicable elsewhere
 - Contain sensitive information not suitable for sharing

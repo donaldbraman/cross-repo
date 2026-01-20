@@ -35,6 +35,7 @@ Symlink `~/.claude/` subdirectories to cross-repo, making resources globally ava
 ```
 
 **Benefits:**
+
 - One-time setup, works everywhere
 - Clean separation (cross-repo = your content, ~/.claude/ = Claude Code runtime)
 - Git history in cross-repo
@@ -112,12 +113,14 @@ Located in `.claude/guides/`:
 ### First-Time Setup on New Machine
 
 1. Clone cross-repo:
+
 ```bash
 cd ~/Documents/GitHub
 git clone https://github.com/donaldbraman/cross-repo.git
 ```
 
 2. Create symlinks:
+
 ```bash
 # Global CLAUDE.md
 ln -sf ~/Documents/GitHub/cross-repo/CLAUDE.md ~/CLAUDE.md
@@ -131,6 +134,7 @@ ln -sf ~/Documents/GitHub/cross-repo/.claude/skills ~/.claude/skills
 ```
 
 3. Verify symlinks:
+
 ```bash
 ls -la ~/.claude/ | grep "^l"
 # Should show 5 symlinks pointing to cross-repo
@@ -139,6 +143,7 @@ ls -la ~/.claude/ | grep "^l"
 ### Broken Symlink Recovery
 
 If symlinks break, recreate them:
+
 ```bash
 rm -f ~/CLAUDE.md ~/.claude/CLAUDE.md ~/.claude/agents ~/.claude/commands ~/.claude/guides ~/.claude/skills
 
@@ -150,6 +155,46 @@ ln -sf ~/Documents/GitHub/cross-repo/.claude/guides ~/.claude/guides
 ln -sf ~/Documents/GitHub/cross-repo/.claude/skills ~/.claude/skills
 ```
 
+### Pre-commit Hooks Setup
+
+This repository uses pre-commit hooks for markdown validation. To install:
+
+1. Install pre-commit (if not already installed):
+
+```bash
+# Using pip
+pip install pre-commit
+
+# Or using Homebrew (macOS)
+brew install pre-commit
+```
+
+2. Install the hooks:
+
+```bash
+cd ~/Documents/GitHub/cross-repo
+pre-commit install
+```
+
+3. (Optional) Run hooks on all files:
+
+```bash
+pre-commit run --all-files
+```
+
+**Hooks Included:**
+
+| Hook | Purpose |
+|------|---------|
+| **markdownlint** | Lint markdown files for style consistency |
+| **markdown-link-check** | Validate links in markdown files |
+
+**Configuration Files:**
+
+- `.pre-commit-config.yaml` - Hook definitions
+- `.markdownlint.yaml` - Markdownlint rules
+- `.markdown-link-check.json` - Link check settings
+
 ## Usage
 
 ### For Repository Maintainers
@@ -157,6 +202,7 @@ ln -sf ~/Documents/GitHub/cross-repo/.claude/skills ~/.claude/skills
 Each project has its own `CLAUDE.md` that imports shared resources and adds project-specific content.
 
 **Example project CLAUDE.md:**
+
 ```markdown
 # Claude Code Instructions for my-project
 
@@ -199,6 +245,9 @@ When reading instructions:
 cross-repo/
 ├── README.md                                    # This file
 ├── CLAUDE.md                                    # Global Claude Code instructions
+├── .pre-commit-config.yaml                      # Pre-commit hooks configuration
+├── .markdownlint.yaml                           # Markdownlint rules
+├── .markdown-link-check.json                    # Link check settings
 └── .claude/
     ├── agents/                                  # Shared agent templates
     │   ├── README.md
@@ -250,6 +299,7 @@ This repository is maintained alongside the individual agent repositories. Updat
 
 **Maintained by**: Donald Braman
 **Related Repositories**:
+
 - [cite-assist](https://github.com/donaldbraman/cite-assist)
 - [pin-citer](https://github.com/donaldbraman/pin-citer)
 - [12-factor-agents](https://github.com/donaldbraman/12-factor-agents)

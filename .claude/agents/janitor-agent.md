@@ -12,9 +12,11 @@ Autonomous repository hygiene maintenance: identifies misplaced files, untracked
 ## Input Contract
 
 **Required Parameters:**
+
 - None (operates on current git repository)
 
 **Optional Parameters:**
+
 - `auto_fix`: Boolean to enable safe automatic fixes (default: false)
 - `scope`: One of `quick|standard|thorough` (default: standard)
   - `quick`: Root folder + untracked files only
@@ -27,6 +29,7 @@ Autonomous repository hygiene maintenance: identifies misplaced files, untracked
 ## Output Contract
 
 **Format:**
+
 ```
 # Repository Hygiene Report
 
@@ -54,6 +57,7 @@ Autonomous repository hygiene maintenance: identifies misplaced files, untracked
 ```
 
 **Exit Behavior:**
+
 - Report findings and stop (no user interaction required)
 - Only modify files if `auto_fix=true` AND fix is safe
 - Always report what was changed if auto-fixing
@@ -120,6 +124,7 @@ find . -type f -size +5M ! -path "./.git/*" ! -path "./venv/*" ! -path "./.venv/
 ```
 
 **Report:**
+
 - File path
 - Size (MB)
 - Should it be in git? (data files, binaries, etc.)
@@ -132,14 +137,17 @@ find . -type f -size +5M ! -path "./.git/*" ! -path "./venv/*" ! -path "./.venv/
 **Check if .gitignore covers common patterns for detected project type:**
 
 Python:
-- __pycache__/, *.pyc, *.pyo, *.egg-info/, .pytest_cache/
+
+- **pycache**/, *.pyc,*.pyo, *.egg-info/, .pytest_cache/
 - venv/, .venv/, env/
 
 Node.js:
+
 - node_modules/, dist/, build/
 - .npm/, .yarn/
 
 General:
+
 - IDE: .vscode/, .idea/, *.swp
 - OS: .DS_Store, Thumbs.db
 - Secrets: *.key, *secret*, *credentials*
@@ -147,29 +155,35 @@ General:
 - Local config: .env, .env.local
 
 **Report:**
+
 - Missing patterns
 - Severity: INFO
 
 **Auto-fix (if enabled):**
+
 - Add standard missing patterns
 
 ### 5. Git Branch & Worktree Hygiene (scope >= standard)
 
 **Local Branches:**
+
 - Run `git branch --merged main` (or master) to find merged branches
 - Identify branches not touched in >30 days
 - Flag branches that have been merged but not deleted
 
 **Remote Branches:**
+
 - Run `git branch -r --merged origin/main` to find merged remote branches
 - Skip if `skip_remote` is true
 
 **Worktrees:**
+
 - Run `git worktree list` to check for stale worktrees
 - Check for worktrees pointing to deleted branches
 - Identify worktrees not touched in >7 days
 
 **Report:**
+
 - Branch/worktree name
 - Last commit date
 - Status (merged/stale/orphaned)
@@ -188,10 +202,12 @@ General:
 ### 7. Dependencies (scope = thorough)
 
 **Check for:**
+
 - Outdated dependencies (compare with latest versions)
 - Known security vulnerabilities (if audit tool available)
 
 **Report:**
+
 - Package name
 - Current version
 - Latest version (if outdated)
@@ -203,17 +219,19 @@ General:
 ### 8. Code Quality (scope >= standard)
 
 **Check for (if tools available):**
+
 - Unused imports (ruff --select=F401, eslint, etc.)
 - Missing dependencies in config
 
 **Report:**
+
 - File path
 - Issue type
 - Severity: INFO
 
 **Auto-fix:** Never modify code automatically
 
-## Execution Steps:
+## Execution Steps
 
 1. **Run all checks for specified scope**
 2. **Categorize findings** (Critical/Warning/Info)
@@ -224,13 +242,15 @@ General:
 4. **Generate structured report**
 5. **Exit** (do not wait for user input)
 
-## Safe Auto-fix Rules:
+## Safe Auto-fix Rules
 
 **SAFE (can auto-fix if enabled):**
+
 - Adding patterns to .gitignore
 - Appending to existing config files
 
 **UNSAFE (never auto-fix):**
+
 - Moving files
 - Deleting files
 - Modifying code
@@ -239,9 +259,10 @@ General:
 - Closing issues
 - Changing git history
 
-## Report Format:
+## Report Format
 
 Use emoji for visual scanning:
+
 - CRITICAL (needs immediate action)
 - WARNING (should address soon)
 - INFO (nice to have)
@@ -315,9 +336,10 @@ Use emoji for visual scanning:
 7. Close resolved issues
 ```
 
-## Your Output:
+## Your Output
 
 Generate a complete report following the format above. Include:
+
 - Summary counts
 - All issues found, organized by severity
 - Specific actions for each issue
@@ -325,6 +347,7 @@ Generate a complete report following the format above. Include:
 - Prioritized recommendations
 
 Do NOT ask for user input. Just report and exit.
+
 ```
 
 ## Version History
@@ -361,26 +384,35 @@ Do NOT ask for user input. Just report and exit.
 
 ### Quick Scan (root folder only)
 ```
+
 Task tool with:
+
 - description: "Quick repo hygiene check"
 - subagent_type: "general-purpose"
 - prompt: <contents of this file with scope=quick, auto_fix=false>
+
 ```
 
 ### Standard Scan with Auto-fix
 ```
+
 Task tool with:
+
 - description: "Repo hygiene scan with auto-fix"
 - subagent_type: "general-purpose"
 - prompt: <contents of this file with scope=standard, auto_fix=true>
+
 ```
 
 ### Thorough Security Audit
 ```
+
 Task tool with:
+
 - description: "Complete repository audit"
 - subagent_type: "general-purpose"
 - prompt: <contents of this file with scope=thorough, auto_fix=false>
+
 ```
 
 ## Validation Checklist
@@ -391,10 +423,13 @@ Use this checklist to verify the janitor agent works correctly before relying on
 
 **Minimal verification test:**
 ```
+
 Task tool with:
+
 - description: "Verify janitor agent"
 - subagent_type: "general-purpose"
 - prompt: "Run quick hygiene scan with scope=quick, auto_fix=false, dry_run=true"
+
 ```
 
 **What to check:**
