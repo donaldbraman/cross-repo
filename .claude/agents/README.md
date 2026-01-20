@@ -1,6 +1,6 @@
 # Shared Agent Templates
 
-**Version:** 2.0.0
+**Version:** 2.1.0
 **Last Updated:** 2025-01-20
 
 ## Overview
@@ -17,6 +17,8 @@ Reference these agents in your project's CLAUDE.md file:
 ## Shared Agents
 @../cross-repo/.claude/agents/testing-agent.md
 @../cross-repo/.claude/agents/janitor-agent.md
+@../cross-repo/.claude/agents/code-review-agent.md
+@../cross-repo/.claude/agents/documentation-agent.md
 ```
 
 ### Invoke with Task Tool
@@ -32,8 +34,10 @@ Task tool with:
 
 | Agent | Purpose | Version |
 |-------|---------|---------|
-| [testing-agent](testing-agent.md) | Autonomous test execution with failure/warning reporting | 2.0.0 |
-| [janitor-agent](janitor-agent.md) | Repository hygiene maintenance and cleanup | 2.0.0 |
+| [testing-agent](testing-agent.md) | Autonomous test execution with failure/warning reporting | 2.1.0 |
+| [janitor-agent](janitor-agent.md) | Repository hygiene maintenance and cleanup | 2.1.0 |
+| [code-review-agent](code-review-agent.md) | Code review for PRs, commits, and changes | 1.0.0 |
+| [documentation-agent](documentation-agent.md) | Documentation generation, updates, and validation | 1.0.0 |
 
 ## Agent Template Structure
 
@@ -67,6 +71,9 @@ All agents follow this standard structure:
 
 ## Usage Examples
 [How to invoke the agent]
+
+## Validation Checklist
+[How to verify agent works correctly]
 ```
 
 ## Versioning
