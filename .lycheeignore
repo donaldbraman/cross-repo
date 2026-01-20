@@ -1,0 +1,17 @@
+# Localhost URLs used in examples and documentation
+http://localhost
+https://localhost
+http://localhost:*
+https://localhost:*
+
+# Example URLs that are placeholders
+https://github.com/user/
+https://github.com/user/*
+
+# External API dashboards that may require authentication
+https://ai.dev/usage
+https://console.cloud.google.com/*
+https://platform.openai.com/*
+
+# File protocol links (local references)
+file://
