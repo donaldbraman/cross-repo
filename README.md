@@ -166,7 +166,7 @@ Each project has its own `CLAUDE.md` that imports shared resources and adds proj
 
 Import what you need from cross-repo:
 
-@../cross-repo/.claude/guides/worktree-dev-cycle.md
+@../cross-repo/.claude/guides/autonomous-cycle.md
 @../cross-repo/.claude/guides/agent-messaging.md
 @../cross-repo/.claude/agents/testing-agent.md
 @../cross-repo/.claude/agents/janitor-agent.md

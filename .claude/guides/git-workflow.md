@@ -1,7 +1,7 @@
 # Git Workflow Guide
 
 **Version:** 1.0.0
-**Last Updated:** 2025-11-10
+**Last Updated:** 2025-01-20
 **Applies to:** All repositories
 
 ## Standard Git Workflow
@@ -64,8 +64,6 @@ git checkout -b feature/<issue-number>-<description>
 <type>: <subject>
 
 <body>
-
-🤖 Generated with [Claude Code](https://claude.com/claude-code)
 
 Co-Authored-By: Claude <noreply@anthropic.com>
 ```
