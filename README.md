@@ -82,6 +82,7 @@ Located in `.claude/commands/`:
 | **[dev-cycle](.claude/commands/dev-cycle.md)** | Execute full autonomous development cycle with worktrees | 1.0.0 |
 | **[fact-check](.claude/commands/fact-check.md)** | Verify empirical claims, statistics, and citations | 1.0.0 |
 | **[proof](.claude/commands/proof.md)** | Proofread documents (PDF, Markdown, text) | 2.1.0 |
+| **[push](.claude/commands/push.md)** | Stage, commit, and push all changes | 1.0.0 |
 
 See [Commands README](.claude/commands/README.md) for usage.
 
@@ -202,7 +203,8 @@ cross-repo/
     │   ├── README.md
     │   ├── dev-cycle.md
     │   ├── fact-check.md
-    │   └── proof.md
+    │   ├── proof.md
+    │   └── push.md
     └── guides/                                  # Shared guides
         ├── autonomous-cycle.md
         ├── agent-messaging.md
