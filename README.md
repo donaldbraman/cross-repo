@@ -3,7 +3,7 @@
 **Purpose**: Central repository for shared Claude Code instructions, agents, skills, commands, and guides across all Donald Braman's repositories.
 
 **Status**: Active
-**Last Updated**: 2025-01-19
+**Last Updated**: 2025-01-20
 
 ---
 
@@ -21,28 +21,36 @@ This repository serves as a **shared library** for Claude Code resources used ac
 
 ## Sharing Approach
 
-### Recommended: Import Syntax
+### Recommended: Global Symlinks
 
-Projects import shared resources using relative paths in their CLAUDE.md:
+Symlink `~/.claude/` subdirectories to cross-repo, making resources globally available:
 
-```markdown
-## Shared Resources
-@../cross-repo/.claude/guides/worktree-dev-cycle.md
-@../cross-repo/.claude/agents/testing-agent.md
-@../cross-repo/.claude/skills/rate-limit-diagnostics/SKILL.md
+```
+~/.claude/
+├── CLAUDE.md → cross-repo/CLAUDE.md
+├── agents/   → cross-repo/.claude/agents/
+├── commands/ → cross-repo/.claude/commands/
+├── guides/   → cross-repo/.claude/guides/
+└── skills/   → cross-repo/.claude/skills/
 ```
 
 **Benefits:**
-- Native Claude Code feature
-- Explicit about what's imported
-- No symlink cross-platform issues
-- Works with relative paths
+- One-time setup, works everywhere
+- Clean separation (cross-repo = your content, ~/.claude/ = Claude Code runtime)
+- Git history in cross-repo
+- Projects can still override with local resources
 
-### Legacy: Symlinks
+### Alternative: Import Syntax
 
-Some projects still use symlinks (gradually migrating to imports):
-- `~/.claude/guides/` symlinked to cross-repo guides
-- Project `.claude/guides/` symlinked to cross-repo
+Projects can also import specific resources using relative paths in their CLAUDE.md:
+
+```markdown
+## Shared Resources
+@../cross-repo/.claude/guides/autonomous-cycle.md
+@../cross-repo/.claude/agents/testing-agent.md
+```
+
+Use this when you want explicit control over which resources a project uses.
 
 ## Contents
 
@@ -111,35 +119,35 @@ git clone https://github.com/donaldbraman/cross-repo.git
 
 2. Create symlinks:
 ```bash
-# Create .claude directory if needed
-mkdir -p ~/.claude
-
-# Symlink CLAUDE.md
+# Global CLAUDE.md
 ln -sf ~/Documents/GitHub/cross-repo/CLAUDE.md ~/CLAUDE.md
-ln -sf ~/Documents/GitHub/cross-repo/CLAUDE.md ~/.claude/CLAUDE.md
 
-# Symlink guides directory
+# All resource directories
+ln -sf ~/Documents/GitHub/cross-repo/CLAUDE.md ~/.claude/CLAUDE.md
+ln -sf ~/Documents/GitHub/cross-repo/.claude/agents ~/.claude/agents
+ln -sf ~/Documents/GitHub/cross-repo/.claude/commands ~/.claude/commands
 ln -sf ~/Documents/GitHub/cross-repo/.claude/guides ~/.claude/guides
+ln -sf ~/Documents/GitHub/cross-repo/.claude/skills ~/.claude/skills
 ```
 
 3. Verify symlinks:
 ```bash
-# Should show cross-repo content
-cat ~/CLAUDE.md | head -5
-
-# Should show "symbolic link"
-ls -la ~/CLAUDE.md
-ls -la ~/.claude/
+ls -la ~/.claude/ | grep "^l"
+# Should show 5 symlinks pointing to cross-repo
 ```
 
 ### Broken Symlink Recovery
 
 If symlinks break, recreate them:
 ```bash
-rm ~/CLAUDE.md ~/.claude/CLAUDE.md ~/.claude/guides
+rm -f ~/CLAUDE.md ~/.claude/CLAUDE.md ~/.claude/agents ~/.claude/commands ~/.claude/guides ~/.claude/skills
+
 ln -sf ~/Documents/GitHub/cross-repo/CLAUDE.md ~/CLAUDE.md
 ln -sf ~/Documents/GitHub/cross-repo/CLAUDE.md ~/.claude/CLAUDE.md
+ln -sf ~/Documents/GitHub/cross-repo/.claude/agents ~/.claude/agents
+ln -sf ~/Documents/GitHub/cross-repo/.claude/commands ~/.claude/commands
 ln -sf ~/Documents/GitHub/cross-repo/.claude/guides ~/.claude/guides
+ln -sf ~/Documents/GitHub/cross-repo/.claude/skills ~/.claude/skills
 ```
 
 ## Usage
@@ -220,9 +228,12 @@ cross-repo/
 ### Symlink Structure
 
 ```
-~/CLAUDE.md → ~/Documents/GitHub/cross-repo/CLAUDE.md
-~/.claude/CLAUDE.md → ~/Documents/GitHub/cross-repo/CLAUDE.md
-~/.claude/guides/ → ~/Documents/GitHub/cross-repo/.claude/guides/
+~/CLAUDE.md           → cross-repo/CLAUDE.md
+~/.claude/CLAUDE.md   → cross-repo/CLAUDE.md
+~/.claude/agents/     → cross-repo/.claude/agents/
+~/.claude/commands/   → cross-repo/.claude/commands/
+~/.claude/guides/     → cross-repo/.claude/guides/
+~/.claude/skills/     → cross-repo/.claude/skills/
 ```
 
 ---
@@ -245,4 +256,4 @@ This repository is maintained alongside the individual agent repositories. Updat
 
 ---
 
-*Last updated: 2025-01-19*
+*Last updated: 2025-01-20*
