@@ -31,8 +31,8 @@ Once imported, the command can be invoked with:
 | Command | Purpose | Arguments | Version |
 |---------|---------|-----------|---------|
 | [dev-cycle](dev-cycle.md) | Execute full autonomous development cycle | task description or issue # | 1.0.0 |
-| [fact-check](fact-check.md) | Verify empirical claims and apply corrections | file path, --report-only | 2.1.0 |
-| [proof](proof.md) | Proofread documents and apply corrections | file path, --report-only | 3.1.0 |
+| [fact-check](fact-check.md) | Verify empirical claims and apply corrections | file path, --report-only | 2.2.0 |
+| [proof](proof.md) | Proofread documents and apply corrections | file path, --report-only | 3.2.0 |
 | [push](push.md) | Stage, commit, and push all changes | optional commit message | 1.0.0 |
 
 ## Command Structure

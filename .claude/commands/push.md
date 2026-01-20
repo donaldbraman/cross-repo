@@ -150,6 +150,14 @@ git commit -m "..."
 
 ---
 
+## Related
+
+- `/dev-cycle` - Full autonomous development cycle (for larger changes)
+- [git-workflow](../guides/git-workflow.md) - Standard git practices
+- [lint-and-hooks](../guides/lint-and-hooks.md) - Pre-commit hook handling
+
+---
+
 ## Version History
 
 ### 1.0.0 (2025-01-19)

@@ -1,6 +1,6 @@
 # Fact-Check Command
 
-**Version:** 2.1.0
+**Version:** 2.2.0
 **Last Updated:** 2025-01-20
 
 Verify empirical claims against original sources, generate corrections, and optionally apply them via git worktree.
@@ -540,7 +540,34 @@ Additional: [Domain-specific category 1], [Category 2]
 
 ---
 
+## Troubleshooting
+
+### Source not found
+- Try different search terms or author name variations
+- Check if URL is behind paywall or requires login
+- Use `--report-only` to flag for manual verification
+
+### Parallel agents timing out
+- Use `--sequential` flag to disable parallelization
+- Break document into smaller sections with `--section`
+
+### Context not found when applying correction
+- Document may have changed since report was generated
+- Regenerate report with `/fact-check --report-only`
+- Ensure context includes enough lines for unique matching
+
+### Worktree creation fails
+```bash
+git worktree prune  # Clean up stale worktrees
+git worktree list   # Check existing worktrees
+```
+
+---
+
 ## Version History
+
+### 2.2.0 (2025-01-20)
+- Added Troubleshooting section
 
 ### 2.1.0 (2025-01-20)
 - Standardized terminology: "Phase" → "Step"

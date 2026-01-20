@@ -1,6 +1,6 @@
 # Document Proofreading Command
 
-**Version:** 3.1.0
+**Version:** 3.2.0
 **Last Updated:** 2025-01-20
 
 Proofread a document, generate corrections, and optionally apply them via git worktree.
@@ -241,7 +241,39 @@ After user decision (or for report-only):
 
 ---
 
+## Troubleshooting
+
+### Context not found when applying correction
+- The document may have changed since the report was generated
+- Try regenerating the report with `/proof --report-only`
+- Ensure context includes enough surrounding lines for unique matching
+
+### Worktree creation fails
+```bash
+git worktree prune  # Clean up stale worktrees
+git worktree list   # Check existing worktrees
+```
+
+### Corrections applied incorrectly
+- Use `git diff` in the worktree to review changes
+- Choose "reject" to discard and try again
+- Report may need more context for unique matching
+
+---
+
+## Related
+
+- `/fact-check` - Verify empirical claims (different purpose)
+- [correction-workflow](../guides/correction-workflow.md) - Shared apply logic
+- [lint-and-hooks](../guides/lint-and-hooks.md) - Pre-commit hook handling
+
+---
+
 ## Version History
+
+### 3.2.0 (2025-01-20)
+- Added Troubleshooting section
+- Added Related section
 
 ### 3.1.0 (2025-01-20)
 - Standardized terminology: "Phase" → "Step"
