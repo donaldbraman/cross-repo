@@ -80,8 +80,8 @@ Located in `.claude/commands/`:
 | Command | Purpose | Version |
 |---------|---------|---------|
 | **[dev-cycle](.claude/commands/dev-cycle.md)** | Execute full autonomous development cycle with worktrees | 1.0.0 |
-| **[fact-check](.claude/commands/fact-check.md)** | Verify empirical claims, statistics, and citations | 1.0.0 |
-| **[proof](.claude/commands/proof.md)** | Proofread documents (PDF, Markdown, text) | 2.1.0 |
+| **[fact-check](.claude/commands/fact-check.md)** | Verify empirical claims and apply corrections | 2.0.0 |
+| **[proof](.claude/commands/proof.md)** | Proofread documents and apply corrections | 3.0.0 |
 | **[push](.claude/commands/push.md)** | Stage, commit, and push all changes | 1.0.0 |
 
 See [Commands README](.claude/commands/README.md) for usage.
@@ -91,6 +91,7 @@ See [Commands README](.claude/commands/README.md) for usage.
 Located in `.claude/guides/`:
 
 - **[autonomous-cycle.md](.claude/guides/autonomous-cycle.md)**: 6-step worktree-based autonomous development cycle
+- **[correction-workflow.md](.claude/guides/correction-workflow.md)**: Apply corrections from /proof and /fact-check via worktree
 - **[agent-messaging.md](.claude/guides/agent-messaging.md)**: Agent-to-agent communication protocol
 - **[github-labels.md](.claude/guides/github-labels.md)**: GitHub label conventions
 - **[pr-guidelines.md](.claude/guides/pr-guidelines.md)**: Pull request creation standards
@@ -207,6 +208,7 @@ cross-repo/
     │   └── push.md
     └── guides/                                  # Shared guides
         ├── autonomous-cycle.md
+        ├── correction-workflow.md
         ├── agent-messaging.md
         ├── github-labels.md
         ├── pr-guidelines.md

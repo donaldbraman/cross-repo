@@ -1,185 +1,267 @@
 # Document Proofreading Command
 
-**Version:** 2.1.0
+**Version:** 3.0.0
 **Last Updated:** 2025-01-19
 
-Proofread a document for errors, inconsistencies, and issues. Use `$ARGUMENTS` to specify the file path and optional parameters.
+Proofread a document, generate corrections, and optionally apply them via git worktree.
+
+## Usage
+
+| Command | Action |
+|---------|--------|
+| `/proof path/to/file.md` | Proof and apply corrections |
+| `/proof path/to/file.md --report-only` | Generate report without applying |
+| `/proof path/to/file.pdf` | Proof PDF (report only, can't edit) |
 
 ## Supported Formats
 
-- **PDF**: Page-by-page visual review
-- **Markdown**: Content and formatting review
-- **Plain text**: Content review
-- **LaTeX**: Source and compiled review
+| Format | Can Edit | Notes |
+|--------|----------|-------|
+| Markdown (.md) | Yes | Full workflow |
+| Plain text (.txt) | Yes | Full workflow |
+| Quarto (.qmd) | Yes | Full workflow |
+| LaTeX (.tex) | Yes | Full workflow |
+| PDF (.pdf) | No | Report only |
+
+---
 
 ## Instructions
 
-You are a professional proofreader. Your task is to systematically review a document for errors, inconsistencies, and issues.
+You are a professional proofreader. Review the document systematically, generate a corrections report, and apply fixes.
 
-### Setup
+---
 
-1. **Check for local style guides** - Review CLAUDE.md for any linked style guides and apply those conventions when proofreading.
+### Phase 1: Setup
 
-2. **Identify document type** from the file extension
-3. **Get document info** to understand structure:
+1. **Parse arguments:**
+   - Extract file path from `$ARGUMENTS`
+   - Check for `--report-only` flag
+   - Determine if file is editable (not PDF)
 
-**For PDF:**
-```bash
-# If pdf_page_extractor.py exists:
-uv run python scripts/pdf_page_extractor.py "$ARGUMENTS" --info
+2. **Check for local style guides** - Review CLAUDE.md for any linked style guides and apply those conventions.
 
-# Otherwise use pypdf directly:
-python -c "from pypdf import PdfReader; r=PdfReader('$ARGUMENTS'); print(f'Pages: {len(r.pages)}')"
-```
+3. **Identify document type** from file extension
 
-**For Markdown/Text:**
-```bash
-wc -l "$ARGUMENTS"
-head -50 "$ARGUMENTS"
-```
+4. **Get document info:**
 
-4. **Plan review strategy** based on document size:
-   - < 20 pages/500 lines: Review all
-   - 20-50 pages/500-2000 lines: Review in batches
-   - > 50 pages/2000 lines: Focus on key sections
+   **For PDF:**
+   ```bash
+   python -c "from pypdf import PdfReader; r=PdfReader('$FILE'); print(f'Pages: {len(r.pages)}')"
+   ```
 
-### Document Review
+   **For Markdown/Text:**
+   ```bash
+   wc -l "$FILE"
+   ```
+
+5. **Plan review strategy** based on size:
+   - < 500 lines: Review all
+   - 500-2000 lines: Review in batches
+   - > 2000 lines: Focus on key sections
+
+---
+
+### Phase 2: Document Review
 
 #### For PDF Documents
 
-Extract and review one page at a time:
-
+Extract and review page by page:
 ```bash
-# Extract page as image
-uv run python scripts/pdf_page_extractor.py "$ARGUMENTS" --page [N] --output /tmp/proof_page.png
-
-# Or extract text
-uv run python scripts/pdf_page_extractor.py "$ARGUMENTS" --page [N] --text
+uv run python scripts/pdf_page_extractor.py "$FILE" --page [N] --text
 ```
-
-Then read the extracted page image or text.
 
 #### For Markdown/Text Documents
 
-Read the document in chunks using the Read tool with offset and limit parameters.
+Read in chunks using the Read tool with offset and limit parameters.
 
-### What to Check
+#### What to Check
 
 **Typography:**
-- Orphans (single lines at top of page)
-- Widows (single lines at bottom of page)
+- Orphans/widows
 - Bad line/word breaks
 - Inconsistent spacing
-- Missing or incorrect punctuation
-
-**Layout (PDF/LaTeX):**
-- Figures/tables in wrong position
-- Missing captions
-- Text overflow or cutoff
-- Misaligned elements
-- Inconsistent margins
+- Missing/incorrect punctuation
 
 **Content:**
 - Typos and spelling errors
 - Grammar issues
-- Broken cross-references (e.g., "Figure ??" or "Table ??")
+- Broken cross-references ("Figure ??")
 - Incorrect numbering
 - Inconsistent terminology
 
-**Academic/Technical:**
-- Equation formatting issues
-- Citation format consistency
-- Bibliography completeness
-- Missing references
-- Incorrect figure/table references
-
 **Markdown-Specific:**
-- Broken links
+- Broken links `[text]()`
 - Inconsistent heading levels
 - Unclosed code blocks
 - Malformed lists
-- Missing alt text for images
 
-### Search for Common Problems
+**Academic/Technical:**
+- Citation format consistency
+- Missing references
+- Equation formatting
 
-**For PDF:**
+#### Search for Common Problems
+
 ```bash
-# Find broken references
-uv run python scripts/pdf_page_extractor.py "$ARGUMENTS" --search "\?\?"
+# Broken links
+grep -n "\[.*\]()" "$FILE"
 
-# Find figure/table references
-uv run python scripts/pdf_page_extractor.py "$ARGUMENTS" --search "Figure \d+"
-uv run python scripts/pdf_page_extractor.py "$ARGUMENTS" --search "Table \d+"
+# TODOs
+grep -n "TODO\|FIXME\|XXX" "$FILE"
+
+# Double spaces
+grep -n "  " "$FILE"
+
+# Broken references
+grep -n "\?\?" "$FILE"
 ```
 
-**For Markdown/Text:**
-```bash
-# Find broken links
-grep -n "\[.*\]()" "$ARGUMENTS"
+---
 
-# Find TODO/FIXME markers
-grep -n "TODO\|FIXME\|XXX" "$ARGUMENTS"
+### Phase 3: Generate Corrections Report
 
-# Find double spaces
-grep -n "  " "$ARGUMENTS"
-```
-
-### Reporting
-
-After reviewing, provide a structured report:
+Format corrections for the [correction-workflow](../guides/correction-workflow.md):
 
 ```markdown
 ## Proofreading Report: [Filename]
 
+**Generated:** [timestamp]
+**Target:** [file path]
+**Editable:** Yes/No
+
 ### Summary
-- Content reviewed: X pages/lines of Y
-- Critical issues: N
-- Minor issues: N
-- Suggestions: N
 
-### Critical Issues (Must Fix)
-1. Page/Line X: [Description]
-2. Page/Line Y: [Description]
+| Category | Count |
+|----------|-------|
+| Errors | X |
+| Warnings | X |
+| Suggestions | X |
 
-### Minor Issues (Should Fix)
-1. Page/Line X: [Description]
+---
 
-### Suggestions (Optional)
-1. Page/Line X: [Suggestion]
+### Corrections
 
-### Review Progress
-- [x] Pages/Lines 1-10
-- [ ] Pages/Lines 11-20
-- ...
+#### [1] Typo: "teh" → "the"
+
+- **Location:** `path/to/file.md:42`
+- **Severity:** Error
+- **Context (before):**
+  ```
+  This is teh example
+  text that needs fixing.
+  ```
+- **Suggested fix:**
+  ```
+  This is the example
+  text that needs fixing.
+  ```
+- **Reason:** Spelling error
+
+#### [2] Missing comma before "and"
+
+- **Location:** `path/to/file.md:78`
+- **Severity:** Warning
+- **Context (before):**
+  ```
+  apples, oranges and bananas
+  ```
+- **Suggested fix:**
+  ```
+  apples, oranges, and bananas
+  ```
+- **Reason:** Oxford comma for consistency
+
+---
+
+### Items Not Auto-Fixable
+
+| Line | Issue | Reason |
+|------|-------|--------|
+| 156 | Unclear reference | Requires author decision |
+| 203 | Missing citation | Source unknown |
 ```
 
-### Workflow
+**Important:** Include 2-3 lines of context in "Context (before)" to ensure unique matching.
 
-1. Start with document info to understand structure
-2. Search for obvious problems (broken refs, TODOs, etc.)
-3. Review title/intro and key sections visually
-4. For thorough review, go page by page or section by section
-5. Compile and present report
+---
 
-### Important Notes
+### Phase 4: Apply Corrections
 
-- **One page/section at a time** to avoid context overflow
+**If `--report-only` OR file is PDF:**
+- Present report only
+- Suggest: "Run without --report-only to apply corrections" (if applicable)
+- Stop here
+
+**If editable file and corrections found:**
+
+Follow the [correction-workflow](../guides/correction-workflow.md):
+
+1. Create worktree to isolate changes
+2. Apply each correction using Edit tool
+3. Show git diff of changes
+4. Present options: approve / reject / keep
+
+**If no corrections found:**
+- Report: "No corrections needed. Document looks good!"
+
+---
+
+### Phase 5: Report Results
+
+After user decision (or for report-only):
+
+```markdown
+## Proof Complete
+
+**Document:** [filename]
+**Corrections:** X applied, Y skipped
+**Status:** [Merged to main / Rejected / Kept for review]
+
+### Changes Made
+- Line 42: Fixed typo "teh" → "the"
+- Line 78: Added Oxford comma
+
+### Skipped
+- Line 156: Unclear reference (requires author decision)
+```
+
+---
+
+## Flags
+
+| Flag | Effect |
+|------|--------|
+| `--report-only` | Generate report without applying corrections |
+| `--auto-approve` | Apply and merge without prompting |
+| `--include-suggestions` | Apply suggestions, not just errors/warnings |
+
+---
+
+## Important Notes
+
+- **One section at a time** to avoid context overflow
 - **Focus on actionable issues** - don't nitpick style unless asked
-- **Prioritize critical issues** - broken references, missing content
-- **Be consistent** - use the same reporting format throughout
+- **Prioritize errors** over warnings over suggestions
+- **Include context** - 2-3 lines around each issue for matching
+- **PDF is report-only** - can't edit PDF files
 
 ---
 
 ## Version History
 
+### 3.0.0 (2025-01-19)
+- Added worktree-based correction workflow
+- Auto-applies corrections with git as undo mechanism
+- Added --report-only flag
+- Standardized correction report format
+- Integrated with correction-workflow.md guide
+
 ### 2.1.0 (2025-01-19)
-- Added step to check CLAUDE.md for linked style guides before proofreading
+- Added step to check CLAUDE.md for linked style guides
 
 ### 2.0.0 (2025-01-19)
 - Generalized from chirho PDF proofer
 - Added support for Markdown and plain text
-- Made script paths configurable
-- Added search patterns for different formats
 
 ### 1.0.0
-- Initial PDF-specific implementation (chirho)
+- Initial PDF-specific implementation
