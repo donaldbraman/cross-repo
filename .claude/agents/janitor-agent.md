@@ -1,7 +1,7 @@
 # Janitor Agent
 
 **Version:** 2.0.0
-**Created:** 2025-11-14
+**Created:** 2024-11-14
 **Last Updated:** 2025-01-19
 **Agent Type:** general-purpose
 
@@ -335,7 +335,7 @@ Do NOT ask for user input. Just report and exit.
 - Added project type detection (Python, Node.js, etc.)
 - Added issue analysis from write-assist version
 
-### 1.0.0 (2025-11-14)
+### 1.0.0 (2024-11-14)
 - Initial implementation
 - Root folder organization check
 - Untracked files analysis
