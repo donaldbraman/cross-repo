@@ -1,6 +1,6 @@
 # Document Proofreading Command
 
-**Version:** 3.3.0
+**Version:** 3.4.0
 **Last Updated:** 2025-01-20
 
 Proofread a document, generate corrections, and optionally apply them via git worktree.
@@ -38,7 +38,7 @@ You are a professional proofreader. Review the document systematically, generate
    - Check for `--report-only` flag
    - Determine if file is editable (not PDF)
 
-2. **Check for local style guides** - Review CLAUDE.md for any linked style guides and apply those conventions.
+2. **Check for local style guides** - Review CLAUDE.md for any linked style guides and apply those conventions. See [CONFIGURATION.md](../CONFIGURATION.md) for style guide configuration options.
 
 3. **Identify document type** from file extension
 
@@ -217,6 +217,7 @@ git worktree list   # Check existing worktrees
 
 - `/fact-check` - Verify empirical claims (different purpose)
 - [Correction Report Schema](../templates/correction-report-schema.md) - Standard format for corrections
+- [CONFIGURATION.md](../CONFIGURATION.md) - All CLAUDE.md configuration options
 - [correction-workflow](../guides/correction-workflow.md) - Shared apply logic
 - [lint-and-hooks](../guides/lint-and-hooks.md) - Pre-commit hook handling
 
@@ -224,15 +225,21 @@ git worktree list   # Check existing worktrees
 
 ## Version History
 
-### 3.3.0 (2025-01-20)
+See [CHANGELOG-proof.md](./CHANGELOG-proof.md) for full version history.
+
+### 3.4.0 (2025-01-20)
 - Replaced inline format specification with reference to correction-report-schema.md
+
+### 3.3.0 (2025-01-20)
+- Added reference to CONFIGURATION.md for style guide options
+- Added CONFIGURATION.md to Related section
 
 ### 3.2.0 (2025-01-20)
 - Added Troubleshooting section
 - Added Related section
 
 ### 3.1.0 (2025-01-20)
-- Standardized terminology: "Phase" → "Step"
+- Standardized terminology: "Phase" -> "Step"
 - Simplified correction workflow reference (removed inline duplication)
 
 ### 3.0.0 (2025-01-19)
@@ -241,13 +248,3 @@ git worktree list   # Check existing worktrees
 - Added --report-only flag
 - Standardized correction report format
 - Integrated with correction-workflow.md guide
-
-### 2.1.0 (2025-01-19)
-- Added step to check CLAUDE.md for linked style guides
-
-### 2.0.0 (2025-01-19)
-- Generalized from chirho PDF proofer
-- Added support for Markdown and plain text
-
-### 1.0.0
-- Initial PDF-specific implementation
