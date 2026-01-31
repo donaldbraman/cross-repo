@@ -118,6 +118,27 @@ gh pr merge <number> --squash --delete-branch
 - **Timing:** Immediate (autonomous mode)
 - **Branch:** Auto-delete after merge
 
+## Post-Merge Cleanup
+
+**After every successful merge**, clean up the local and remote branch and any associated worktree. This is mandatory, not optional.
+
+```bash
+# Switch back to main and pull
+git checkout main
+git pull origin main
+
+# Delete the local branch (if it still exists)
+git branch -d <branch-name>
+
+# Remove any associated worktree
+git worktree remove <worktree-path>  # use --force if needed
+
+# Prune stale remote-tracking refs
+git fetch --prune
+```
+
+This ensures branches and worktrees never accumulate. Every `/merge`, `/push`, and `/dev-cycle` run should leave the repo with only `main` and any actively in-progress branches.
+
 ## Common Operations
 
 ### Update Feature Branch
