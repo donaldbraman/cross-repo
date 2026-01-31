@@ -43,6 +43,12 @@ Standard Dev Cycle: Analyze & Research → GitHub Issue & Worktree → Dev & Tes
 
 **Details:** [~/.claude/guides/code-versioning.md](file:///Users/donaldbraman/.claude/guides/code-versioning.md)
 
+## Sibling Repository Map
+
+**Local repos and their relationships.**
+
+**Details:** [~/.claude/guides/sibling-repos.md](file:///Users/donaldbraman/.claude/guides/sibling-repos.md)
+
 ## Project-Specific Instructions
 
 Each repository has project-specific instructions:
@@ -53,4 +59,4 @@ Each repository has project-specific instructions:
 
 ---
 
-*Last updated: 2025-01-19*
+*Last updated: 2026-01-31*

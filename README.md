@@ -107,6 +107,8 @@ Located in `.claude/guides/`:
 - **[lint-and-hooks.md](.claude/guides/lint-and-hooks.md)**: Pre-commit hook handling
 - **[git-workflow.md](.claude/guides/git-workflow.md)**: Standard git practices
 - **[code-versioning.md](.claude/guides/code-versioning.md)**: Semantic versioning patterns
+- **[sibling-repos.md](.claude/guides/sibling-repos.md)**: Map of local sibling repositories and their relationships
+- **[voice-setup.md](.claude/guides/voice-setup.md)**: Voice mode installation and configuration
 
 ## Setup
 
@@ -298,12 +300,8 @@ This repository is maintained alongside the individual agent repositories. Updat
 ---
 
 **Maintained by**: Donald Braman
-**Related Repositories**:
-
-- [cite-assist](https://github.com/donaldbraman/cite-assist)
-- [pin-citer](https://github.com/donaldbraman/pin-citer)
-- [12-factor-agents](https://github.com/donaldbraman/12-factor-agents)
+**Related Repositories**: See [sibling-repos guide](.claude/guides/sibling-repos.md) for the full map.
 
 ---
 
-*Last updated: 2025-01-20*
+*Last updated: 2026-01-31*
