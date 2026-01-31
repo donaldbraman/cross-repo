@@ -37,6 +37,7 @@ Once imported, the command can be invoked with:
 | [push](push.md) | Stage, commit, and push all changes | optional commit message | 1.0.0 |
 | [refactor](refactor.md) | Analyze codebase for refactoring opportunities | --report, --path, --max, --auto-approve | 1.0.0 |
 | [repeat-back](repeat-back.md) | Repeat back user query with clarity to confirm understanding | optional query text | 1.0.0 |
+| [voice](voice.md) | Start a voice conversation with Claude Code | optional message to speak | 1.0.0 |
 
 ### Companion Files
 
@@ -134,6 +135,7 @@ Detailed workflow guides are available in the [guides/](../guides/) directory:
 | [correction-workflow.md](../guides/correction-workflow.md) | Applying corrections from reports |
 | [lint-and-hooks.md](../guides/lint-and-hooks.md) | Pre-commit hook handling |
 | [pr-guidelines.md](../guides/pr-guidelines.md) | Pull request creation standards |
+| [voice-setup.md](../guides/voice-setup.md) | Voice interface installation and configuration |
 
 ---
 
