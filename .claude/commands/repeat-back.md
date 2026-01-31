@@ -1,7 +1,7 @@
 # Repeat Back Command
 
 **Version:** 1.0.0
-**Last Updated:** 2025-01-20
+**Last Updated:** 2026-01-20
 
 Repeat back the user's query with enhanced clarity and detail to confirm mutual understanding before proceeding. Use `$ARGUMENTS` as the query to analyze (or reference the most recent user request if empty).
 
@@ -199,7 +199,7 @@ Is this understanding correct?
 
 ## Version History
 
-### 1.0.0 (2025-01-20)
+### 1.0.0 (2026-01-20)
 
 - Initial release
 - Structured repeat-back format with core goal, requirements, scope, and clarifications

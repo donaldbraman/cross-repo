@@ -1,7 +1,7 @@
 # Merge Command
 
 **Version:** 1.0.0
-**Last Updated:** 2025-01-31
+**Last Updated:** 2026-01-31
 
 Stage, commit, push, code review, and merge changes in one command. Use `$ARGUMENTS` for an optional commit message.
 
@@ -37,11 +37,7 @@ git diff --stat
 
 #### Stage Files
 
-```bash
-git add .
-```
-
-**Check for files that should be gitignored but aren't:**
+**Before staging, check for files that should be gitignored but aren't:**
 
 - `.env`, credentials, API keys
 - Build artifacts (`node_modules/`, `__pycache__/`, `site_libs/`)
@@ -53,7 +49,12 @@ If found, add them to `.gitignore` first:
 
 ```bash
 echo "pattern" >> .gitignore
-git add .gitignore
+```
+
+Then stage all changes:
+
+```bash
+git add .
 ```
 
 #### Create Commit
@@ -239,7 +240,7 @@ Please merge manually after checks pass.
 
 ## Version History
 
-### 1.0.0 (2025-01-31)
+### 1.0.0 (2026-01-31)
 
 - Initial implementation
 - Full pipeline: stage, commit, push, review, merge
