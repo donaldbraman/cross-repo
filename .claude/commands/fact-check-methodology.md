@@ -1,7 +1,7 @@
 # Fact-Check Methodology
 
-**Version:** 1.0.0
-**Last Updated:** 2025-01-20
+**Version:** 1.1.0
+**Last Updated:** 2026-01-27
 
 Detailed step-by-step methodology for fact-checking documents. This is a companion file to the main [fact-check.md](fact-check.md) command.
 
@@ -97,7 +97,58 @@ Atomic facts:
 
 ## Step 4: Verify Each Claim
 
-For each claim, search for the original source using a **tiered approach**:
+For each claim, search for the original source using a **tiered approach**.
+
+### Context Management for Large Source Files
+
+**CRITICAL:** When verifying against large source files (books, PDFs, extracted text), agents must avoid context overload:
+
+**Never:**
+
+- Read entire book/source files into context
+- Pass full chapters to agents
+- Extract more than 10-20 lines per search
+
+**Always:**
+
+- Use targeted grep searches with specific phrases, names, or numbers
+- Extract only 5-10 lines around matches (`grep -C 3`)
+- Search for multiple specific terms rather than reading broadly
+- Report findings concisely (verdict + brief source quote)
+
+**Example search patterns for book verification:**
+
+```bash
+# Search for specific statistic
+grep -i -C 3 "4.3 times" "/path/to/book.txt"
+
+# Search for author name
+grep -i -C 3 "Baldus" "/path/to/book.txt" | head -30
+
+# Search for specific phrase from claim
+grep -i -C 3 "real lawmaker" "/path/to/book.txt"
+
+# Combine terms for precision
+grep -i "menu" "/path/to/book.txt" | grep -i "prosecutor"
+```
+
+**Agent instructions should include:**
+
+```
+CRITICAL: Context management
+- DO NOT read entire book files - they will blow out context
+- Use targeted grep searches with specific phrases
+- Extract only 5-10 lines around matches
+- Report findings concisely
+```
+
+**If a source file is too large:**
+
+1. Identify specific terms/names/numbers from the claim
+2. Search for those terms rather than reading the file
+3. If multiple searches fail, escalate to "Unable to Verify" with note about source availability
+
+---
 
 ### Tier 1: Local Source Library (if configured)
 
@@ -338,3 +389,17 @@ After user decision:
 - [fact-check-reference](fact-check-reference.md) - Claim types and red flags
 - [Correction Report Schema](../templates/correction-report-schema.md) - Standard format for corrections
 - [correction-workflow](../guides/correction-workflow.md) - Shared apply logic
+
+---
+
+## Version History
+
+### 1.1.0 (2026-01-27)
+
+- Added "Context Management for Large Source Files" section
+- Guidance for agents verifying against books/PDFs without blowing out context
+- Example grep patterns for targeted searching
+
+### 1.0.0 (2025-01-20)
+
+- Initial release

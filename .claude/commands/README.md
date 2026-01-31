@@ -33,8 +33,10 @@ Once imported, the command can be invoked with:
 | [dev-cycle](dev-cycle.md) | Execute full autonomous development cycle | task description or issue # | 1.0.0 |
 | [fact-check](fact-check.md) | Verify empirical claims and apply corrections | file path, --report-only | 3.0.0 |
 | [proof](proof.md) | Proofread documents and apply corrections | file path, --report-only | 3.4.0 |
+| [merge](merge.md) | Stage, commit, push, review, and merge | optional commit message | 1.0.0 |
 | [push](push.md) | Stage, commit, and push all changes | optional commit message | 1.0.0 |
 | [refactor](refactor.md) | Analyze codebase for refactoring opportunities | --report, --path, --max, --auto-approve | 1.0.0 |
+| [repeat-back](repeat-back.md) | Repeat back user query with clarity to confirm understanding | optional query text | 1.0.0 |
 
 ### Companion Files
 
